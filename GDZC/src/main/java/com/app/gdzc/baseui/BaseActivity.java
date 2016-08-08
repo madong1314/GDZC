@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.app.gdzc.R;
 import com.app.gdzc.baseui.presenter.BasePresenter;
+import com.app.gdzc.utils.StatusBarUtil;
 import com.app.gdzc.utils.Utils;
 
 import butterknife.ButterKnife;
@@ -37,6 +38,8 @@ public abstract class BaseActivity<V, M, P extends BasePresenter<V,M>> extends A
         super.onCreate(savedInstanceState);
         mPresenter = initPresenter();
         if (mPresenter != null) mPresenter.attach((V) this);
+        StatusBarUtil.transparencyBar(this);
+        StatusBarUtil.setStatusBarColor(this,R.color.black);
         setContentView(R.layout.activity_base);
         mContentFlayout = (FrameLayout) findViewById(R.id.flayout_content);
         initTitleBarView();
