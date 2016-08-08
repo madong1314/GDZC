@@ -1,0 +1,43 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.1.2'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    println("delete rootProject.buildDir " + rootProject.buildDir + "\n\r")
+    delete rootProject.buildDir
+}
+
+// Define versions in a single place
+ext {
+    // Sdk and tools
+    minSdkVersion = 15
+    targetSdkVersion = 23
+    compileSdkVersion = 23
+    buildToolsVersion = '23.0.3'
+
+    // App dependencies
+    supportLibraryVersion = '23.4.0'
+    recyclerviewVersion = '23.4.0'
+    butterknifeVersion = '6.1.0'
+    gsonVersion = '2.4'
+    multidexVersion = '1.0.1'
+    guavaVersion = '18.0'
+//    evenbusVersion = '3.0.0'
+
+}
