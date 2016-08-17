@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.app.gdzc.R;
-import com.app.gdzc.utils.ExceptionHandler;
 
 /**
  * 数据加载对话框
@@ -57,7 +56,6 @@ public class LoadingDialog extends Dialog {
             });
             super.show();
         } catch (Exception e) {
-            ExceptionHandler.handle(e);
         }
     }
 
@@ -76,7 +74,6 @@ public class LoadingDialog extends Dialog {
                 super.dismiss();
             }
         } catch (Exception e) {
-            ExceptionHandler.handle(e);
         }
     }
 

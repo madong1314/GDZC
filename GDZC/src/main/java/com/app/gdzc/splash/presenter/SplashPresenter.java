@@ -1,58 +1,41 @@
 package com.app.gdzc.splash.presenter;
 
-import android.app.Activity;
 import android.os.CountDownTimer;
 
-import com.app.gdzc.MainActivity;
-import com.app.gdzc.baseui.IEmptyInterface;
-import com.app.gdzc.baseui.presenter.BasePresenter;
-import com.app.gdzc.login.view.LoginActivity;
-import com.app.gdzc.splash.view.ISplashView;
-import com.app.gdzc.utils.ENavigate;
+import com.app.gdzc.splash.contract.SplashContract;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Created by 王少岩 on 2016/8/5.
  */
-public class SplashPresenter extends BasePresenter<ISplashView, IEmptyInterface> {
-    private ISplashView mSplashView;
-    private Activity mActivity;
+public class SplashPresenter implements SplashContract.Presenter {
+    private SplashContract.View mSplashView;
 
-    public SplashPresenter(ISplashView splashView, Activity activity) {
-        mSplashView = splashView;
-        mActivity = activity;
+    public SplashPresenter(SplashContract.View view) {
+        mSplashView = checkNotNull(view, "mSplashView can not be null");
+        mSplashView.setPresenter(this);
     }
 
     @Override
-    protected IEmptyInterface generateModel() {
-        return null;
+    public void start() {
+        new MyCount(5000, 1000).start();
     }
 
     public class MyCount extends CountDownTimer {
         public MyCount(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
         }
+
         @Override
         public void onFinish() {
             mSplashView.setMainText("跳过0s");
-            //startMainActivity();
-            startLoginActivity();
+            mSplashView.startMainActivity();
         }
+
         @Override
         public void onTick(long millisUntilFinished) {
-            mSplashView.setMainText("跳过"+millisUntilFinished/1000+"s");
+            mSplashView.setMainText("跳过" + millisUntilFinished / 1000 + "s");
         }
-    }
-
-    public MyCount getMyCount(long millisInFuture, long countDownInterval){
-        return new MyCount(millisInFuture, countDownInterval);
-    }
-
-    public void startMainActivity(){
-        ENavigate.startActivity(mActivity, MainActivity.class);
-        mActivity.finish();
-    }
-    public void startLoginActivity(){
-        ENavigate.startActivity(mActivity, LoginActivity.class);
-        mActivity.finish();
     }
 }

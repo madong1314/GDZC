@@ -71,7 +71,6 @@ public class Utils {
         try {
             value = URLEncoder.encode(str, "UTF-8");
         } catch (UnsupportedEncodingException e) {
-            ExceptionHandler.handle(e);
         }
 
         return value;

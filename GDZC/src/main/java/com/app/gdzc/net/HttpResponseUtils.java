@@ -2,6 +2,7 @@ package com.app.gdzc.net;
 
 import android.app.Activity;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -10,9 +11,7 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.app.gdzc.baseui.BaseApplication;
-import com.app.gdzc.baseui.bean.BaseBean;
-import com.app.gdzc.utils.BaseLog;
+import com.app.gdzc.base.BaseApplication;
 import com.app.gdzc.utils.NetStateUtils;
 import com.app.gdzc.utils.Utils;
 
@@ -52,15 +51,8 @@ public class HttpResponseUtils {
                     public void onResponse(String response) {
                         Utils.hideLoading();
                         if (!TextUtils.isEmpty(response)) {
-                            BaseLog.i(url+"  ----------response-->>" + response);
+                            Log.i("postUrl",url+"  ----------response-->>" + response);
                             try {
-                                BaseBean baseBean = GsonUtils.json2Bean(response,
-                                        BaseBean.class);
-                                String status = baseBean.getStatus().getCode();
-                                if (!status.equals("0000")) {
-                                    responseListener.requestError(tag, baseBean.getStatus().getMsg());
-                                    return;
-                                }
                                 responseListener.requestCompleted(tag, GsonUtils.json2Bean(response, clz));
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -70,7 +62,7 @@ public class HttpResponseUtils {
                 }, new ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                BaseLog.i("-----VolleyError---"+"-----VolleyError--->>" + error.toString());
+                Log.i("VolleyError", "-----VolleyError--->>" + error.toString());
                 if (showLoading) Utils.hideLoading();
                 responseListener.requestError(tag, "网络异常！");
             }
@@ -100,16 +92,7 @@ public class HttpResponseUtils {
                     public void onResponse(String response) {
                         Utils.hideLoading();
                         if (!TextUtils.isEmpty(response)) {
-                            BaseLog.i(url+"  ----------response-->>" + response);
                             try {
-                                BaseBean baseBean = GsonUtils.json2Bean(response,
-                                        BaseBean.class);
-                                String status = baseBean.getStatus().getCode();
-                                if (!status.equals("0000")) {
-                                    BaseLog.i("====error code=====> "+status);
-                                    responseListener.requestError(tag, baseBean.getStatus().getMsg());
-                                    return;
-                                }
                                 responseListener.requestCompleted(tag, GsonUtils.json2Bean(response, clz));
 
                             } catch (JSONException e) {
@@ -120,7 +103,6 @@ public class HttpResponseUtils {
                 }, new ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                BaseLog.i("-----VolleyError---"+"-----VolleyError--->>" + error.toString());
                 if (showLoading) Utils.hideLoading();
                 responseListener.requestError(tag, "网络异常！");
             }
@@ -163,7 +145,7 @@ public class HttpResponseUtils {
                 "==============================================\n" +
                 "url    -> " + url+param + "\n" +
                 "==============================================\n";
-        BaseLog.i("send url " + method+ " -> " + reStr );
+        Log.i("send url", "send url " + method+ " -> " + reStr );
     }
 
 }
