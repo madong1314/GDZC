@@ -6,10 +6,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.app.gdzc.MainActivity;
+import com.app.gdzc.login.view.MainActivity;
 import com.app.gdzc.R;
 import com.app.gdzc.splash.contract.SplashContract;
 import com.app.gdzc.utils.ENavigate;

@@ -24,4 +24,6 @@
     <dimen name="statusbarz_web_height">0dp</dimen>
 
     <dimen name="stroke_width">0.5px</dimen>
+
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

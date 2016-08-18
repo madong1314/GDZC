@@ -16,12 +16,12 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_base);
-        findViewById(R.id.flayout_content).setBackgroundResource(R.mipmap.image_spalsh);
-        SplashFragment splashFragment = (SplashFragment) getSupportFragmentManager().findFragmentById(R.id.flayout_content);
+        setContentView(R.layout.layout_activity_base);
+        findViewById(R.id.contentFrame).setBackgroundResource(R.mipmap.image_spalsh);
+        SplashFragment splashFragment = (SplashFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
         if(splashFragment == null){
             splashFragment = SplashFragment.newInstance();
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), splashFragment, R.id.flayout_content);
+            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), splashFragment, R.id.contentFrame);
         }
         new SplashPresenter(splashFragment);
     }
