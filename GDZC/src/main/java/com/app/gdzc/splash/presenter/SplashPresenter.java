@@ -19,7 +19,12 @@ public class SplashPresenter implements SplashContract.Presenter {
 
     @Override
     public void start() {
-        new MyCount(5000, 1000).start();
+
+    }
+
+    @Override
+    public MyCount getCountTimer(){
+        return new MyCount(5000, 1000);
     }
 
     public class MyCount extends CountDownTimer {

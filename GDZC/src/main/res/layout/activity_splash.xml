@@ -10,7 +10,8 @@
         android:id="@+id/image_splash"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitXY" />
+        android:src="@mipmap/image_spalsh"
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/tv_go_main"
@@ -20,8 +21,8 @@
         android:padding="5dp"
         android:textColor="@color/black"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="@dimen/margin_normal"
-        android:layout_marginRight="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/dimen_10"
+        android:layout_marginRight="@dimen/dimen_10"
         android:gravity="center"
         android:alpha="0.6"
         android:singleLine="false"

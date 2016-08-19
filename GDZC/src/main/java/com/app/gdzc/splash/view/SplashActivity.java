@@ -1,29 +1,69 @@
 package com.app.gdzc.splash.view;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.TextView;
 
 import com.app.gdzc.R;
+import com.app.gdzc.base.BaseActivity;
+import com.app.gdzc.login.view.LoginActivity;
+import com.app.gdzc.splash.contract.SplashContract;
 import com.app.gdzc.splash.presenter.SplashPresenter;
-import com.app.gdzc.utils.ActivityUtils;
+import com.app.gdzc.utils.ENavigate;
+
+import butterknife.InjectView;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Created by 王少岩 on 2016/8/5.
  */
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity implements SplashContract.View, View.OnClickListener {
+    @InjectView(R.id.tv_go_main)
+    TextView mTextView;
+    private SplashContract.Presenter mPresenter;
+    private SplashPresenter.MyCount mCount;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_activity_base);
-        findViewById(R.id.contentFrame).setBackgroundResource(R.mipmap.image_spalsh);
-        SplashFragment splashFragment = (SplashFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
-        if(splashFragment == null){
-            splashFragment = SplashFragment.newInstance();
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), splashFragment, R.id.contentFrame);
+    protected void localOnCreate(Bundle savedInstanceState) {
+        setContentView(R.layout.activity_splash);
+        setOnclickListener(this, mTextView);
+        new SplashPresenter(this);
+        mCount = mPresenter.getCountTimer();
+        mCount.start();
+    }
+
+    @Override
+    public void setMainText(String mainText) {
+        mTextView.setText(mainText);
+    }
+
+    @Override
+    public void startMainActivity() {
+        ENavigate.startActivity(this, LoginActivity.class);
+        finish();
+    }
+
+    @Override
+    public void startLoginActivity() {
+        ENavigate.startActivity(this, LoginActivity.class);
+        finish();
+    }
+
+    @Override
+    public void setPresenter(SplashContract.Presenter presenter) {
+        mPresenter = checkNotNull(presenter);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.tv_go_main:
+                mCount.cancel();
+                startLoginActivity();
+            break;
         }
-        new SplashPresenter(splashFragment);
     }
 
     //屏蔽返回键的代码:

@@ -1,17 +1,4 @@
 <resources>
-
-    <style name="BaseAppTheme" parent="Base.AppTheme" />
-
-    <style name="AppTheme.OverlapSystemBar" parent="Base.AppTheme" />
-
-    <style name="Base.AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <style name="Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <!-- Base application theme. -->
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar"></style>
     <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/AppBaseTheme">
@@ -23,18 +10,6 @@
     <style name="Translucent_Fullscreen" parent="Theme.AppCompat.Light.NoActionBar.FullScreen">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>
-    </style>
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <style name="line_dark_h">
-        <item name="android:background">@color/gray_stroke_dark</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/stroke_width</item>
     </style>
 
     <style name="custom_dialog" parent="android:Theme.Dialog">
@@ -50,11 +25,11 @@
     <style name="app_alert_dialog_button_style">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">@dimen/margin_bigger</item>
-        <item name="android:layout_marginRight">@dimen/margin_bigger</item>
+        <item name="android:layout_marginLeft">@dimen/dimen_14</item>
+        <item name="android:layout_marginRight">@dimen/dimen_14</item>
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center</item>
-        <item name="android:padding">@dimen/margin_bigger</item>
+        <item name="android:padding">@dimen/dimen_14</item>
         <item name="android:textSize">@dimen/text_size_15</item>
         <item name="android:textColor">@color/red</item>
     </style>
@@ -70,6 +45,22 @@
         <!-- 背景透明 -->
         <item name="android:backgroundDimEnabled">true</item>
         <!-- 模糊 -->
+    </style>
+
+    <style name="text_base">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:padding">@dimen/dimen_10</item>
+        <item name="android:textColorHint">@color/text_hint</item>
+    </style>
+
+    <style name="text_nomal" parent="text_base">
+        <item name="android:textColor">@color/text_nomal</item>
+    </style>
+
+    <style name="text_sub" parent="text_base">
+        <item name="android:textColor">@color/text_sub</item>
     </style>
 
 </resources>

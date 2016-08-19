@@ -10,9 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="@dimen/margin_normal"
+        android:padding="@dimen/dimen_10"
         android:textSize="@dimen/text_size_16"
-        android:textColor="@color/text_title_sub"
+        android:textColor="@color/text_sub"
         android:visibility="visible"/>
 
     <TextView
@@ -21,10 +21,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:padding="@dimen/margin_bigger"
+        android:padding="@dimen/dimen_14"
         android:singleLine="false"
-        android:textColor="@color/text_title_sub"
-        android:layout_marginBottom="@dimen/margin_normal"
+        android:textColor="@color/text_sub"
+        android:layout_marginBottom="@dimen/dimen_10"
         android:textSize="@dimen/text_size_15"/>
 
     <View
@@ -35,8 +35,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_normal"
-        android:layout_marginRight="@dimen/margin_normal"
+        android:layout_marginLeft="@dimen/dimen_10"
+        android:layout_marginRight="@dimen/dimen_10"
         android:orientation="horizontal">
 
         <TextView

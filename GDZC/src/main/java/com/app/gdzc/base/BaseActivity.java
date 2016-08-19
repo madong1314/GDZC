@@ -6,13 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.app.gdzc.R;
+import com.app.gdzc.utils.StatusBarUtil;
 
 import butterknife.ButterKnife;
 
@@ -24,12 +24,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected Toolbar mToolbar;
     protected TextView mTitle;
     protected FrameLayout mLayout;
-    private Menu mMenu;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setCustomerView(R.layout.layout_activity_base);
+        StatusBarUtil.transparencyBar(this);
+        StatusBarUtil.setStatusBarColor(this,R.color.black);
+        setCustomerView(R.layout.activity_base);
         localOnCreate(savedInstanceState);
     }
 
@@ -77,36 +78,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         mToolbar.setNavigationIcon(R.mipmap.icon_back);
     }
 
-    protected boolean onLeftClick() {
-        return false;
-    }
-
-    protected void onRigthClick(){}
-
-    protected void setRight(){
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.meun_main, menu);
-        mMenu = menu;
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        return super.onPrepareOptionsMenu(menu);
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                if (!onLeftClick()) onBackPressed();
-                break;
-            case R.id.action_right:
-                onRigthClick();
+                onBackPressed();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -116,5 +92,17 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+    protected void setOnclickListener(View.OnClickListener listener, View...views ){
+        if(listener!=null){
+            int len = views.length;
+            for(int i=0;i<len;i++){
+                View view = views[i];
+                if(view != null){
+                    view.setOnClickListener(listener);
+                }
+            }
+        }
     }
 }
