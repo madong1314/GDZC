@@ -1,59 +1,32 @@
-package com.app.gdzc.splash.view;
+package com.app.gdzc.splash;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
 import com.app.gdzc.R;
 import com.app.gdzc.base.BaseActivity;
-import com.app.gdzc.login.view.LoginActivity;
-import com.app.gdzc.splash.contract.SplashContract;
-import com.app.gdzc.splash.presenter.SplashPresenter;
+import com.app.gdzc.login.LoginActivity;
 import com.app.gdzc.utils.ENavigate;
 
 import butterknife.InjectView;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 /**
  * Created by 王少岩 on 2016/8/5.
  */
-public class SplashActivity extends BaseActivity implements SplashContract.View, View.OnClickListener {
+public class SplashActivity extends BaseActivity implements View.OnClickListener {
     @InjectView(R.id.tv_go_main)
     TextView mTextView;
-    private SplashContract.Presenter mPresenter;
-    private SplashPresenter.MyCount mCount;
+    private MyCount mCount;
 
     @Override
     protected void localOnCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_splash);
         setOnclickListener(this, mTextView);
-        new SplashPresenter(this);
-        mCount = mPresenter.getCountTimer();
+        mCount = new MyCount(5000, 1000);
         mCount.start();
-    }
-
-    @Override
-    public void setMainText(String mainText) {
-        mTextView.setText(mainText);
-    }
-
-    @Override
-    public void startMainActivity() {
-        ENavigate.startActivity(this, LoginActivity.class);
-        finish();
-    }
-
-    @Override
-    public void startLoginActivity() {
-        ENavigate.startActivity(this, LoginActivity.class);
-        finish();
-    }
-
-    @Override
-    public void setPresenter(SplashContract.Presenter presenter) {
-        mPresenter = checkNotNull(presenter);
     }
 
     @Override
@@ -80,5 +53,32 @@ public class SplashActivity extends BaseActivity implements SplashContract.View,
                 return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    public void startMainActivity() {
+        ENavigate.startActivity(this, LoginActivity.class);
+        finish();
+    }
+
+    public void startLoginActivity() {
+        ENavigate.startActivity(this, LoginActivity.class);
+        finish();
+    }
+
+    public class MyCount extends CountDownTimer {
+        public MyCount(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onFinish() {
+            mTextView.setText("跳过0s");
+            startMainActivity();
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            mTextView.setText("跳过" + millisUntilFinished / 1000 + "s");
+        }
     }
 }
