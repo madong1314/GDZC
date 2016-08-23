@@ -13,4 +13,5 @@
     <color name="text_sub">#585858</color>
     <color name="text_hint">#9c9c9c</color>
     <color name="alertdialog_line">#c6c6c6</color>
+    <color name="lines_border">#e5e5e5</color>
 </resources>

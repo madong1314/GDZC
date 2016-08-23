@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.app.gdzc.utils.DB_Copy;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -34,7 +35,15 @@ public class BaseApplication extends Application {
             mQueue = Volley.newRequestQueue(this);
         }
 
+        /**
+         * 初始化ImageLoader
+         */
         initImageLoader();
+
+        /**
+         * 复制数据库
+         */
+        copyDB();
 
     }
 
@@ -78,5 +87,13 @@ public class BaseApplication extends Application {
                 .defaultDisplayImageOptions(needCacheOption) // cache
                 .build();
         ImageLoader.getInstance().init(config);
+    }
+
+    /**
+     * 复制数据库
+     */
+    private void copyDB(){
+        DB_Copy db_copy = new DB_Copy(this);
+        if(!db_copy.isDataBaseExist())db_copy.copyDataBase();
     }
 }

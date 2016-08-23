@@ -63,4 +63,16 @@
         <item name="android:textColor">@color/text_sub</item>
     </style>
 
+    <style name="line_cell_light_h">
+        <item name="android:background">@color/lines_border</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.3dp</item>
+    </style>
+
+    <style name="line_cell_light_w">
+        <item name="android:background">@color/lines_border</item>
+        <item name="android:layout_width">0.3dp</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
 </resources>

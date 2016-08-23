@@ -3,6 +3,8 @@ package com.app.gdzc.login;
 import android.text.TextUtils;
 
 import com.app.gdzc.base.BaseApplication;
+import com.app.gdzc.data.bean.LoginBean;
+import com.app.gdzc.data.source.local.LoginDao;
 import com.app.gdzc.utils.SPUtils;
 import com.app.gdzc.utils.Utils;
 
@@ -39,7 +41,12 @@ public class LoginPresenter implements LoginContract.Presenter {
         SPUtils.setUserName(mLoginView.getUserName());
         SPUtils.setRembPwd(mLoginView.isRembPwd());
         if(mLoginView.isRembPwd()) SPUtils.setPassWord(mLoginView.getPassWord());
+        Utils.showToast(BaseApplication.getAppContext(), "密码不能为空");
 
-        mLoginView.startMainActivity();
+        if(new LoginDao(BaseApplication.getAppContext()).queryUser(new LoginBean(mLoginView.getUserName(), mLoginView.getPassWord()))){
+            mLoginView.startMainActivity();
+        }else{
+            Utils.showToast(BaseApplication.getAppContext(), "用户名或密码不不正确");
+        }
     }
 }
