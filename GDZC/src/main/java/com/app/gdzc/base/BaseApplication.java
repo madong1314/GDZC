@@ -94,6 +94,6 @@ public class BaseApplication extends Application {
      */
     private void copyDB(){
         DB_Copy db_copy = new DB_Copy(this);
-        if(!db_copy.isDataBaseExist())db_copy.copyDataBase();
+        db_copy.copyDataBase();
     }
 }
