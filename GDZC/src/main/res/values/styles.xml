@@ -55,7 +55,7 @@
         <item name="android:textColorHint">@color/text_hint</item>
     </style>
 
-    <style name="text_nomal" parent="text_base">
+    <style name="text_normal" parent="text_base">
         <item name="android:textColor">@color/text_nomal</item>
     </style>
 
@@ -73,6 +73,29 @@
         <item name="android:background">@color/lines_border</item>
         <item name="android:layout_width">0.3dp</item>
         <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="edit_normal" parent="text_normal">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:lines">1</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingTop">@dimen/dimen_6</item>
+        <item name="android:paddingBottom">@dimen/dimen_6</item>
+        <item name="android:textColorHint">@color/gray</item>
+    </style>
+
+    <style name="cell">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:minHeight">@dimen/dimen_50</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/dimen_10</item>
+        <item name="android:paddingTop">@dimen/dimen_6</item>
+        <item name="android:paddingBottom">@dimen/dimen_6</item>
+        <item name="android:paddingRight">@dimen/dimen_10</item>
     </style>
 
 </resources>

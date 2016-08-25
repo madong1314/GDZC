@@ -26,20 +26,10 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource) {
-//        try {
-//            TableUtils.createTable(connectionSource, LoginBean.class);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource, int i, int i1) {
-//        try {
-//            TableUtils.dropTable(connectionSource, LoginBean.class, true);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
     }
 
     public synchronized SQLiteDatabase getWritableDatabase() {

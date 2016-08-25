@@ -1,5 +1,6 @@
 package com.app.gdzc.splash;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.KeyEvent;
@@ -7,24 +8,28 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.app.gdzc.R;
-import com.app.gdzc.base.BaseActivity;
 import com.app.gdzc.login.LoginActivity;
+import com.app.gdzc.main.MainActivity;
 import com.app.gdzc.utils.ENavigate;
+import com.app.gdzc.utils.SPUtils;
 
+import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 /**
  * Created by 王少岩 on 2016/8/5.
  */
-public class SplashActivity extends BaseActivity implements View.OnClickListener {
+public class SplashActivity extends Activity implements View.OnClickListener {
     @InjectView(R.id.tv_go_main)
     TextView mTextView;
     private MyCount mCount;
 
     @Override
-    protected void localOnCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        setOnclickListener(this, mTextView);
+        ButterKnife.inject(this);
+        mTextView.setOnClickListener(this);
         mCount = new MyCount(5000, 1000);
         mCount.start();
     }
@@ -34,7 +39,10 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
         switch (v.getId()){
             case R.id.tv_go_main:
                 mCount.cancel();
-                startLoginActivity();
+                if(SPUtils.isLogin())
+                    startMainActivity();
+                else
+                    startLoginActivity();
             break;
         }
     }
@@ -56,7 +64,7 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
     }
 
     public void startMainActivity() {
-        ENavigate.startActivity(this, LoginActivity.class);
+        ENavigate.startActivity(this, MainActivity.class);
         finish();
     }
 
@@ -73,7 +81,10 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
         @Override
         public void onFinish() {
             mTextView.setText("跳过0s");
-            startMainActivity();
+            if(SPUtils.isLogin())
+                startMainActivity();
+            else
+                startLoginActivity();
         }
 
         @Override

@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical"
-    android:paddingTop="@dimen/statusbar_height">
+    android:orientation="vertical">
 
     <include
         layout="@layout/layout_ad_viewpager"
@@ -21,83 +20,89 @@
             android:layout_height="0dp"
             android:layout_weight="1">
             <LinearLayout
+                android:id="@+id/llayout_sbdj"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center">
                 <TextView
-                    style="@style/text_nomal"
+                    style="@style/text_normal"
+                    android:text="@string/main_sbdj"/>
+            </LinearLayout>
+
+            <View style="@style/line_cell_light_w"/>
+
+            <LinearLayout
+                android:id="@+id/llayout_sbsh"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+                <TextView
+                    style="@style/text_normal"
+                    android:text="@string/main_sbsh"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View style="@style/line_cell_light_h"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <LinearLayout
+                android:id="@+id/llayout_zmxg"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+                <TextView
+                    style="@style/text_normal"
+                    android:text="@string/main_zmxg"/>
+            </LinearLayout>
+
+            <View style="@style/line_cell_light_w"/>
+
+            <LinearLayout
+                android:id="@+id/llayout_zccx"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+                <TextView
+                    style="@style/text_normal"
                     android:text="@string/main_zccx"/>
             </LinearLayout>
+        </LinearLayout>
 
-            <View style="@style/line_cell_light_w"/>
+        <View style="@style/line_cell_light_h"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
             <LinearLayout
+                android:id="@+id/llayout_txfx"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center">
                 <TextView
-                    style="@style/text_nomal"
+                    style="@style/text_normal"
                     android:text="@string/main_txfx"/>
             </LinearLayout>
-        </LinearLayout>
 
-        <View style="@style/line_cell_light_h"/>
+            <View style="@style/line_cell_light_w"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
             <LinearLayout
+                android:id="@+id/llayout_zcbg"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center">
                 <TextView
-                    style="@style/text_nomal"
+                    style="@style/text_normal"
                     android:text="@string/main_zcbg"/>
-            </LinearLayout>
-
-            <View style="@style/line_cell_light_w"/>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-                <TextView
-                    style="@style/text_nomal"
-                    android:text="@string/main_flcx"/>
-            </LinearLayout>
-        </LinearLayout>
-
-        <View style="@style/line_cell_light_h"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-                <TextView
-                    style="@style/text_nomal"
-                    android:text="@string/main_zcqd"/>
-            </LinearLayout>
-
-            <View style="@style/line_cell_light_w"/>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-                <TextView
-                    style="@style/text_nomal"
-                    android:text="@string/main_xxtz"/>
             </LinearLayout>
 
         </LinearLayout>

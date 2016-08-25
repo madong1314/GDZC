@@ -45,4 +45,8 @@ public abstract class BaseDao<T, Integer> {
         PreparedQuery<T> preparedQuery = queryBuilder.prepare();
         return query(preparedQuery);
     }
+
+    public List<T> queryForAll() throws SQLException{
+        return getDao().queryForAll();
+    }
 }

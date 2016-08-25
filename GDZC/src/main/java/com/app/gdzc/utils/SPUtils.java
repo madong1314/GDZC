@@ -9,6 +9,7 @@ public class SPUtils {
     private static final String USER_NAME = "user_name";
     private static final String PASS_WORD = "pass_word";
     private static final String REMB_PWD = "remb_pwd";
+    private static final String IS_LOGIN = "is_login";
 
     //保存、获取用户名
     public static void setUserName(String userName){
@@ -35,5 +36,14 @@ public class SPUtils {
 
     public static boolean isRembPwd() {
         return BaseApplication.getAppContext().getUserPreference().getBoolean(REMB_PWD, false);
+    }
+
+    //判断登录状态
+    public static void setIsLogin(boolean isLogin){
+        BaseApplication.getAppContext().getUserPreference().edit().putBoolean(IS_LOGIN, isLogin).commit();
+    }
+
+    public static boolean isLogin(){
+        return BaseApplication.getAppContext().getUserPreference().getBoolean(IS_LOGIN, false);
     }
 }
