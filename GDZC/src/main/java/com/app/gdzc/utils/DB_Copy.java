@@ -1,6 +1,7 @@
 package com.app.gdzc.utils;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.app.gdzc.R;
@@ -32,7 +33,7 @@ public class DB_Copy {
         File dest = new File(dir, DATABASE_NAME);
         if(dest.exists()) return;
         try {
-            dest.createNewFile();
+            SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(dest, null);
             InputStream is = mContext.getResources().openRawResource(R.raw.gdzc);
             FileOutputStream fos = new FileOutputStream(dest);
             byte[] buffer = new byte[8192];
@@ -43,6 +44,7 @@ public class DB_Copy {
             }
             fos.close();
             is.close();
+            db.close();
         } catch (IOException e) {
             Log.e("COPY_DB","数据库复制出错");
             e.printStackTrace();

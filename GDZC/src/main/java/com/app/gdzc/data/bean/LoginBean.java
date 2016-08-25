@@ -14,9 +14,7 @@ public class LoginBean {
     @DatabaseField(columnName = "密码")
     private String passWord;
 
-    public LoginBean(String userName, String passWord) {
-        this.userName = userName;
-        this.passWord = passWord;
+    public LoginBean() {
     }
 
     public String getUserName() {

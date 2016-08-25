@@ -3,11 +3,10 @@ package com.app.gdzc.login;
 import android.text.TextUtils;
 
 import com.app.gdzc.base.BaseApplication;
+import com.app.gdzc.data.bean.LoginBean;
 import com.app.gdzc.data.source.local.LoginDao;
 import com.app.gdzc.utils.SPUtils;
 import com.app.gdzc.utils.Utils;
-
-import java.sql.SQLException;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 /**
@@ -43,11 +42,10 @@ public class LoginPresenter implements LoginContract.Presenter {
         SPUtils.setRembPwd(mLoginView.isRembPwd());
         if(mLoginView.isRembPwd()) SPUtils.setPassWord(mLoginView.getPassWord());
 
+        LoginBean loginBean = new LoginBean();
+        loginBean.setUserName(mLoginView.getUserName());
+        loginBean.setPassWord(mLoginView.getPassWord());
         LoginDao loginDao = new LoginDao(BaseApplication.getAppContext());
-        try {
-            loginDao.query("用户名", mLoginView.getUserName());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        if(loginDao.queryUser(loginBean)) mLoginView.startMainActivity();
     }
 }

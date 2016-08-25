@@ -2,7 +2,6 @@ package com.app.gdzc.data.source.local;
 
 import android.content.Context;
 
-import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
@@ -14,7 +13,7 @@ import java.util.List;
  * Created by 王少岩 on 2016/8/24.
  */
 public abstract class BaseDao<T, Integer> {
-    protected DataBaseHelper mDataBaseHelper;
+    protected DatabaseHelper mDataBaseHelper;
     protected Context mContext;
 
     public BaseDao(Context context) {
@@ -22,9 +21,9 @@ public abstract class BaseDao<T, Integer> {
         getHelper();
     }
 
-    public DataBaseHelper getHelper() {
+    public DatabaseHelper getHelper() {
         if (mDataBaseHelper == null) {
-            mDataBaseHelper = OpenHelperManager.getHelper(mContext, DataBaseHelper.class);
+            mDataBaseHelper = DatabaseHelper.getHelper(mContext);
         }
         return mDataBaseHelper;
     }
