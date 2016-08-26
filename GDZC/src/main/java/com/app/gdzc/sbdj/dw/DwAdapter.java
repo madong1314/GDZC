@@ -1,4 +1,4 @@
-package com.app.gdzc.sbdj;
+package com.app.gdzc.sbdj.dw;
 
 import android.content.Context;
 
@@ -12,9 +12,9 @@ import java.util.List;
 /**
  * Created by 王少岩 on 2016/8/26.
  */
-public class SbdjDwAdapter extends CommonAdapter<LydwBean> {
+public class DwAdapter extends CommonAdapter<LydwBean> {
 
-    public SbdjDwAdapter(Context context, int layoutId, List<LydwBean> datas) {
+    public DwAdapter(Context context, int layoutId, List<LydwBean> datas) {
         super(context, layoutId, datas);
     }
 

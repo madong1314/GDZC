@@ -27,6 +27,8 @@
         <activity android:name=".sbdj.SbdjActivity"
                   android:screenOrientation="portrait"
                   android:windowSoftInputMode="stateUnspecified|adjustPan|stateAlwaysHidden"/>
+        <activity android:name=".sbdj.dw.DwActivity"
+                  android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
