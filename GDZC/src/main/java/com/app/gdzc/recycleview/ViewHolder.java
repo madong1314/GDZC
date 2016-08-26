@@ -98,6 +98,12 @@ public class ViewHolder extends RecyclerView.ViewHolder
         return this;
     }
 
+    public ViewHolder setHintText(int viewId, String text){
+        TextView tv = getView(viewId);
+        tv.setHint(text);
+        return this;
+    }
+
     public ViewHolder setImageResource(int viewId, int resId)
     {
         ImageView view = getView(viewId);

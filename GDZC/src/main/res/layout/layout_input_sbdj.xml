@@ -5,10 +5,9 @@
     android:orientation="vertical">
     <LinearLayout
         style="@style/cell"
-        android:focusable="true"
         android:focusableInTouchMode="true">
         <TextView
-            android:id="@+id/textview_label"
+            android:id="@+id/tv_label"
             style="@style/text_normal"
             android:layout_width="wrap_content"
             android:gravity="top"
@@ -23,7 +22,7 @@
             android:textColor="@color/text_nomal"
         />
         <EditText
-            android:id="@+id/edittext_input"
+            android:id="@+id/et_input"
             style="@style/edit_normal"
             android:layout_marginLeft="@dimen/dimen_10"
             android:layout_marginRight="5dp"
@@ -34,6 +33,18 @@
             android:textColor="@color/text_sub"
         />
         <TextView
+            android:id="@+id/tv_input"
+            style="@style/edit_normal"
+            android:layout_marginLeft="@dimen/dimen_10"
+            android:layout_marginRight="5dp"
+            android:ellipsize="end"
+            android:gravity="left"
+            android:hint="input"
+            android:singleLine="true"
+            android:textColor="@color/text_sub"
+            android:visibility="gone"
+        />
+        <TextView
             android:id="@+id/tv_canbenull"
             style="@style/text_normal"
             android:layout_width="wrap_content"
@@ -42,9 +53,5 @@
             android:textColor="@color/red"
         />
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/lines_border"/>
 
 </LinearLayout>

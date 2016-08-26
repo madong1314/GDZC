@@ -3,6 +3,7 @@ package com.app.gdzc.sbdj;
 import com.app.gdzc.base.BasePresenter;
 import com.app.gdzc.base.BaseView;
 import com.app.gdzc.data.bean.TsxxBean;
+import com.app.gdzc.data.bean.ZJBean;
 
 import java.util.List;
 
@@ -15,6 +16,6 @@ public class SbdjContract {
     }
 
     interface Presenter extends BasePresenter{
-
+        void saveSbdj(ZJBean zjBean);
     }
 }
