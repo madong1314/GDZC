@@ -10,12 +10,14 @@ import com.app.gdzc.data.source.local.LoginDao;
 import com.app.gdzc.utils.SPUtils;
 import com.app.gdzc.utils.Utils;
 
+import java.util.List;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Created by 王少岩 on 2016/8/22.
  */
-public class LoginPresenter implements LoginContract.Presenter, DataSource.Callback<LoginBean> {
+public class LoginPresenter implements LoginContract.Presenter, DataSource.Callback<List<LoginBean>> {
 
     private LoginContract.LoginView mLoginView;
     private LoginDao mLoginDao;
@@ -50,22 +52,24 @@ public class LoginPresenter implements LoginContract.Presenter, DataSource.Callb
         loginBean.setPassWord(mLoginView.getPassWord());
 
         //根据输入的用户名和密码查询数据库
-        mLoginDao.search(0, loginBean, this);
+        mLoginDao.getData(0, loginBean, this);
     }
 
     @Override
-    public void onComplete(int tag, LoginBean object) {
+    public void onComplete(int tag, List<LoginBean> list) {
         switch (tag) {
             case 0:
-                //保存用户名、密码
-                SPUtils.setUserName(mLoginView.getUserName());
-                SPUtils.setRembPwd(mLoginView.isRembPwd());
-                //保存记住密码
-                if (mLoginView.isRembPwd())
-                    SPUtils.setPassWord(mLoginView.getPassWord());
-                SPUtils.setIsLogin(true);
-                //跳转到首页
-                mLoginView.startMainActivity();
+                if (list.size() > 0) {
+                    //保存用户名、密码
+                    SPUtils.setUserName(mLoginView.getUserName());
+                    SPUtils.setRembPwd(mLoginView.isRembPwd());
+                    //保存记住密码
+                    if (mLoginView.isRembPwd())
+                        SPUtils.setPassWord(mLoginView.getPassWord());
+                    SPUtils.setIsLogin(true);
+                    //跳转到首页
+                    mLoginView.startMainActivity();
+                }
                 break;
         }
     }

@@ -26,4 +26,6 @@
     <string name="sbdj_dwjc">单位简称：</string>
     <string name="sbdj_dwjm">单位简码：</string>
 
+    <string name="flh_search">请输入分类名称、分类号</string>
+
 </resources>

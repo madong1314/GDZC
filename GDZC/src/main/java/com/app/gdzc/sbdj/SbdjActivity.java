@@ -18,6 +18,7 @@ import com.app.gdzc.base.BaseActivity;
 import com.app.gdzc.data.bean.TsxxBean;
 import com.app.gdzc.data.bean.ZJBean;
 import com.app.gdzc.sbdj.dw.DwActivity;
+import com.app.gdzc.sbdj.fl.FlActivity;
 import com.app.gdzc.utils.ENavigate;
 
 import java.util.HashMap;
@@ -61,32 +62,51 @@ public class SbdjActivity extends BaseActivity implements SbdjContract.SbdjView 
             tv.setText(tsxxBean.getShowContent());
             canbenull.setVisibility(tsxxBean.getCanBeNull().equals("1")?View.VISIBLE:View.GONE);
 
-            if(tsxxBean.getColNameEng().equals("lydwh")){
-                tv_input.setVisibility(View.VISIBLE);
-                et_input.setVisibility(View.GONE);
-                tv_input.setHint(tsxxBean.getHintContent());
-                tv_input.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mLydwh = tv_input;
-                        ENavigate.startActivityForResult(SbdjActivity.this, DwActivity.class, 1000);
-                    }
-                });
-            }else{
-                et_input.setHint(tsxxBean.getHintContent());
-                et_input.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            switch (tsxxBean.getColNameEng()){
+                case "flh":
+                    tv_input.setVisibility(View.VISIBLE);
+                    et_input.setVisibility(View.GONE);
+                    tv_input.setHint(tsxxBean.getHintContent());
+                    tv_input.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mLydwh = tv_input;
+                            Bundle bundle = new Bundle();
+                            bundle.putString("flmc", tv_input.getText().toString());
+                            ENavigate.startActivityForResult(SbdjActivity.this, FlActivity.class, 1000, bundle);
+                        }
+                    });
+                break;
+                case "lydwh":
+                    tv_input.setVisibility(View.VISIBLE);
+                    et_input.setVisibility(View.GONE);
+                    tv_input.setHint(tsxxBean.getHintContent());
+                    tv_input.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mLydwh = tv_input;
+                            Bundle bundle = new Bundle();
+                            bundle.putString("dwmc", tv_input.getText().toString());
+                            ENavigate.startActivityForResult(SbdjActivity.this, DwActivity.class, 1000, bundle);
+                        }
+                    });
+                break;
+                default:
+                    et_input.setHint(tsxxBean.getHintContent());
+                    et_input.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {}
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
-                    @Override
-                    public void afterTextChanged(Editable s) {
-                        SbdeMap.remove(tsxxBean.getShowContent());
-                        SbdeMap.put(tsxxBean.getShowContent(), s.toString());
-                    }
-                });
+                        @Override
+                        public void afterTextChanged(Editable s) {
+                            SbdeMap.remove(tsxxBean.getShowContent());
+                            SbdeMap.put(tsxxBean.getShowContent(), s.toString());
+                        }
+                    });
+                break;
             }
             mLayoutRoot.addView(view);
         }

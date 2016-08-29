@@ -3,15 +3,14 @@ package com.app.gdzc.sbdj.dw;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.app.gdzc.R;
 import com.app.gdzc.base.BaseActivity;
 import com.app.gdzc.data.bean.LydwBean;
 import com.app.gdzc.data.source.local.LydwDao;
-import com.app.gdzc.recycleview.OnItemClickListener;
+import com.pulltofresh.PullToRefreshRecyclerView;
 
 import butterknife.InjectView;
 
@@ -20,7 +19,7 @@ import butterknife.InjectView;
  */
 public class DwActivity extends BaseActivity {
     @InjectView(R.id.rv)
-    RecyclerView mRecyclerView;
+    PullToRefreshRecyclerView mRecyclerView;
 
     LinearLayoutManager mLinearLayoutManager;
     DwAdapter mDwAdapter;
@@ -34,26 +33,36 @@ public class DwActivity extends BaseActivity {
     }
 
     private void initView(){
+        String dwmc = getIntent().getExtras().getString("dwmc");
+        LydwBean lydwBean = new LydwBean();
+        lydwBean.setDwmc(dwmc);
         mLinearLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mRecyclerView.setHasFixedSize(true);
-        mDwAdapter = new DwAdapter(this, R.layout.adapter_item_dw, new LydwDao(this).getData());
-        mRecyclerView.setAdapter(mDwAdapter);
-        mDwAdapter.setOnItemClickListener(new OnItemClickListener<LydwBean>() {
-            @Override
-            public void onItemClick(ViewGroup parent, View view, LydwBean lydwBean, int position) {
+        mRecyclerView.getRefreshableView().setLayoutManager(mLinearLayoutManager);
+        mRecyclerView.getRefreshableView().setHasFixedSize(true);
+        mDwAdapter = new DwAdapter(this, R.layout.adapter_item_rv, new LydwDao(this).getData());
+        mDwAdapter.setLydwBean(lydwBean);
+        mRecyclerView.getRefreshableView().setAdapter(mDwAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.meun_main, menu);
+        menu.findItem(R.id.action_right).setTitle("确定");
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_right:
                 Intent data = new Intent();
                 data.putExtra("colName", "领用单位号");
-                data.putExtra("colCode", lydwBean.getDwbh());
-                data.putExtra("colValue", lydwBean.getDwmc());
+                data.putExtra("colCode", mDwAdapter.getLydwBean().getDwbh());
+                data.putExtra("colValue", mDwAdapter.getLydwBean().getDwmc());
                 setResult(RESULT_OK, data);
                 finish();
-            }
-
-            @Override
-            public boolean onItemLongClick(ViewGroup parent, View view, LydwBean lydwBean, int position) {
-                return false;
-            }
-        });
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

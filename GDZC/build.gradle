@@ -30,4 +30,5 @@ dependencies {
     compile 'com.google.guava:guava:16.0.1'
     compile 'com.android.support:design:23.4.0'
     compile project(':viewpagerindicator')
+    compile project(':pulltofresh')
 }
