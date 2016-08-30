@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.app.gdzc.R;
 import com.app.gdzc.base.BaseFragment;
@@ -35,12 +34,10 @@ public class SbdjFragment extends BaseFragment<IEmptyInterFace, SbdjModel, SbdjP
     @InjectView(R.id.rv)
     RecyclerView mRecyclerView;
 
-    LinearLayoutManager mLinearLayoutManager;
-    SbdjAdapter mSbdjAdapter;
+    private LinearLayoutManager mLinearLayoutManager;
+    private SbdjAdapter mSbdjAdapter;
     private List<TsxxBean> mList = new ArrayList<>();
-
     private Map<String, String> SbdeMap = new HashMap<>();
-    private TextView mLydwh;
 
     @Override
     protected void localCreateView(Bundle savedInstanceState) {
