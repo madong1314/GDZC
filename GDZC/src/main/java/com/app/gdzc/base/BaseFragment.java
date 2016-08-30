@@ -33,9 +33,11 @@ public abstract class BaseFragment<V, M, P extends BasePresenter<V, M>> extends 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mPresenter = initPresenter();
         if (mPresenter != null) mPresenter.attach((V) this);
+        setHasOptionsMenu(true);
         if (mView == null) {
             mView = inflater.inflate(R.layout.fragment_base, container, false);
-            mFrameLayout = (FrameLayout) findViewById(R.id.contentFrame);mToolbar = (Toolbar) findViewById(R.id.toolbar);
+            mFrameLayout = (FrameLayout) findViewById(R.id.contentFrame);
+            mToolbar = (Toolbar) findViewById(R.id.toolbar);
             ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
             mTitle = (TextView) findViewById(R.id.tv_title);
             localCreateView(savedInstanceState);

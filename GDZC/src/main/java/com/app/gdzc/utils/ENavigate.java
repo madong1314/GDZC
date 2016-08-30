@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.app.gdzc.sbdj.SbdjActivity;
+
 /**
  * Created by 王少岩 on 2016/8/5.
  */
@@ -39,5 +41,11 @@ public class ENavigate {
         Intent intent= new Intent(activity,activityClass);
         intent.putExtras(bundle);
         activity.startActivityForResult(intent,requestCode);
+    }
+
+    public static void startSbdjActivity(Activity activity, String tag){
+        Bundle bundle = new Bundle();
+        bundle.putString(SbdjActivity.FRAGMENT, tag);
+        startActivity(activity, SbdjActivity.class, bundle);
     }
 }

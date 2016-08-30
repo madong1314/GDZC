@@ -3,7 +3,9 @@ package com.app.gdzc.sbdj.presenter;
 import com.app.gdzc.base.BaseApplication;
 import com.app.gdzc.base.BasePresenter;
 import com.app.gdzc.base.IEmptyInterFace;
+import com.app.gdzc.data.bean.LydwBean;
 import com.app.gdzc.data.bean.TsxxBean;
+import com.app.gdzc.data.source.local.LydwDao;
 import com.app.gdzc.data.source.local.TsxxDao;
 import com.app.gdzc.data.source.local.ZJDao;
 import com.app.gdzc.net.ResponseListener;
@@ -46,10 +48,16 @@ public class SbdjPresenter extends BasePresenter<IEmptyInterFace, SbdjModel> imp
     @Override
     public void requestCompleted(String tag, Object response) throws JSONException {
         switch (tag) {
-            case TsxxDao.TSXX_TAG:
+            case TsxxDao.TSXX_TAG: {
                 List<TsxxBean> list = (List<TsxxBean>) response;
                 mSbdjView.showView(list);
                 break;
+            }
+            case LydwDao.LYDWDAO_TAG: {
+                List<LydwBean> list = (List<LydwBean>) response;
+                mDwView.showView(list);
+                break;
+            }
             case ZJDao.ZJ_CREATE:
                 Utils.showToast(BaseApplication.getAppContext(), "保存成功");
                 break;
@@ -61,11 +69,15 @@ public class SbdjPresenter extends BasePresenter<IEmptyInterFace, SbdjModel> imp
 
     }
 
-    public void getTsxx(){
+    public void getTsxx() {
         mModel.getTsxx(this);
     }
 
-    public void createZJ(){
+    public void createZJ() {
         mModel.createZJ();
+    }
+
+    public void getDw() {
+        mModel.getDw(this);
     }
 }

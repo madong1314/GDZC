@@ -75,7 +75,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.llayout_sbdj:
-                ENavigate.startActivity(this, SbdjActivity.class);
+                ENavigate.startSbdjActivity(this, SbdjActivity.SBDJFRAGMENT);
                 break;
             case R.id.llayout_sbsh:
                 break;

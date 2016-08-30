@@ -80,17 +80,19 @@ public abstract class BaseDao<T, Integer> {
     }
 
     private List<T> queryLike(int pageNo, HashMap<String, String> map) throws SQLException {
-        QueryBuilder<T, Integer> queryBuilder = getDao().queryBuilder();
-        Where<T, Integer> where = queryBuilder.where();
-        for (Map.Entry<String, String> entry : map.entrySet()) {
-            where.like(entry.getKey(), "%" + entry.getValue() + "%").or();
-        }
-        if(pageNo>=1){
+        if (pageNo >= 1) {
+            QueryBuilder<T, Integer> queryBuilder = getDao().queryBuilder();
+            Where<T, Integer> where = queryBuilder.where();
+            for (Map.Entry<String, String> entry : map.entrySet()) {
+                where.like(entry.getKey(), "%" + entry.getValue() + "%").or();
+            }
             queryBuilder.limit(20);
             queryBuilder.offset(pageNo);
+            PreparedQuery<T> preparedQuery = queryBuilder.prepare();
+            return query(preparedQuery);
+        }else{
+            return queryForAll();
         }
-        PreparedQuery<T> preparedQuery = queryBuilder.prepare();
-        return query(preparedQuery);
     }
 
     private void getData(final String tag, final int pageNo, final HashMap<String, String> map, final ResponseListener<List<T>> listener, final String flag) {

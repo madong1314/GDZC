@@ -25,9 +25,9 @@ public class DwAdapter extends CommonAdapter<LydwBean> {
     @Override
     public void convert(ViewHolder holder, final LydwBean lydwBean) {
         holder.setText(R.id.tv_name, lydwBean.getDwmc());
-        holder.setText(R.id.tv_code, lydwBean.getDwjm());
+        holder.setText(R.id.tv_code, lydwBean.getDwbh());
         CheckBox checkBox = holder.getView(R.id.cb);
-        if (lydwBean.getDwmc().equals(mLydwBean.getDwmc())) {
+        if (lydwBean.getDwbh().equals(mLydwBean.getDwbh())) {
             checkBox.setChecked(true);
         } else {
             checkBox.setChecked(false);

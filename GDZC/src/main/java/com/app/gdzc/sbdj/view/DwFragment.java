@@ -38,10 +38,11 @@ public class DwFragment extends BaseFragment<IEmptyInterFace, SbdjModel, SbdjPre
         setTitle("领用单位");
         showLeft();
         initView();
+        mPresenter.getDw();
     }
 
     private void initView(){
-        String dwmc = getArguments().getString("dwmc");
+        String dwmc = getArguments().getString("dwmc", "");
         LydwBean lydwBean = new LydwBean();
         lydwBean.setDwmc(dwmc);
         mLinearLayoutManager = new LinearLayoutManager(getActivity());

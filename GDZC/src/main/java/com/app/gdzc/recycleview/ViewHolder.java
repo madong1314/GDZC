@@ -26,7 +26,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 public class ViewHolder extends RecyclerView.ViewHolder
 {
     private SparseArray<View> mViews;
-    private int mPosition;
+    public int mPosition;
     private View mConvertView;
     private Context mContext;
     private int mLayoutId;

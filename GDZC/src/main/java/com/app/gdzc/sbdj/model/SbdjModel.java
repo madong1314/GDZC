@@ -2,6 +2,7 @@ package com.app.gdzc.sbdj.model;
 
 import android.content.Context;
 
+import com.app.gdzc.data.source.local.LydwDao;
 import com.app.gdzc.data.source.local.TsxxDao;
 import com.app.gdzc.net.ResponseListener;
 
@@ -21,5 +22,9 @@ public class SbdjModel {
 
     public void createZJ(){
 
+    }
+
+    public void getDw(ResponseListener listener){
+        new LydwDao(mContext).getData(LydwDao.LYDWDAO_TAG, listener);
     }
 }
