@@ -63,7 +63,7 @@ public class SbdjFragment extends BaseFragment<IEmptyInterFace, SbdjModel, SbdjP
             public void onFlhClickListener() {
                 Bundle bundle = new Bundle();
                 bundle.putString(SbdjActivity.FRAGMENT, SbdjActivity.FLHFRAGMENT);
-                bundle.putString("dwmc", mSbdjAdapter.dwmc);
+                bundle.putString("flmc", mSbdjAdapter.dwmc);
                 ENavigate.startActivity(getActivity(), SbdjActivity.class, bundle);
             }
         });
@@ -71,7 +71,10 @@ public class SbdjFragment extends BaseFragment<IEmptyInterFace, SbdjModel, SbdjP
         mSbdjAdapter.setLydwListener(new SbdjAdapter.LydwListener() {
             @Override
             public void onLydwClickListener() {
-                ENavigate.startSbdjActivity(getActivity(), SbdjActivity.DWFRAGMENT);
+                Bundle bundle = new Bundle();
+                bundle.putString(SbdjActivity.FRAGMENT, SbdjActivity.DWFRAGMENT);
+                bundle.putString("dwmc", mSbdjAdapter.dwmc);
+                ENavigate.startActivity(getActivity(), SbdjActivity.class, bundle);
             }
         });
     }

@@ -43,7 +43,7 @@ public class FlhFragment extends BaseFragment<IEmptyInterFace, SbdjModel, SbdjPr
     }
 
     private void initView() {
-        String flmc = getArguments().getString("flmc");
+        String flmc = getArguments().getString("flmc", "");
         SbmkBean sbmkBean = new SbmkBean();
         sbmkBean.setMc(flmc);
         mLinearLayoutManager = new LinearLayoutManager(getActivity());

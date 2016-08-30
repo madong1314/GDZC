@@ -43,6 +43,8 @@ public class SbdjActivity extends BaseActivity {
                 break;
             case FLHFRAGMENT:
                 mFlhFragment = new FlhFragment();
+                bundle.putString("flmc", getIntent().getExtras().getString("flmc"));
+                mFlhFragment.setArguments(bundle);
                 ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), mFlhFragment, R.id.contentFrame);
                 break;
         }
