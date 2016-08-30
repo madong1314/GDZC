@@ -3,10 +3,8 @@ package com.app.gdzc.net;
 import org.json.JSONException;
 
 
-public interface ResponseListener {
-//	void requestStarted();
+public interface ResponseListener<T> {
+    void requestCompleted(String tag, T response) throws JSONException;
 
-	void requestCompleted(int tag, Object response) throws JSONException;
-
-	void requestError(int tag, String error);
+    void requestError(String tag, String error);
 }

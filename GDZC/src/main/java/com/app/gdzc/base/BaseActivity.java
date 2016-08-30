@@ -5,11 +5,13 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.gdzc.R;
 import com.app.gdzc.utils.StatusBarUtil;
@@ -19,15 +21,20 @@ import butterknife.ButterKnife;
 /**
  * Created by 王少岩 on 2016/8/17.
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity<V, M, P extends BasePresenter<V, M> > extends AppCompatActivity {
 
     protected Toolbar mToolbar;
     protected TextView mTitle;
     protected FrameLayout mLayout;
+    private long mClickTime = 0l;
+    private static int EXIT_TIMEOUT = 2500;
+    protected P mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPresenter = initPresenter();
+        if (mPresenter != null) mPresenter.attach((V) this);
         StatusBarUtil.transparencyBar(this);
         StatusBarUtil.setStatusBarColor(this,R.color.black);
         setCustomerView(R.layout.activity_base);
@@ -82,16 +89,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                onBackPressed();
+                finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
     }
 
     protected void setOnclickListener(View.OnClickListener listener, View...views ){
@@ -105,4 +106,27 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         }
     }
+
+    private boolean isRoot() {
+        return isTaskRoot() || (getParent() != null && getParent().isTaskRoot());
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+
+        if (isRoot() && event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            long second = System.currentTimeMillis();
+            if (second - mClickTime < EXIT_TIMEOUT) {
+                finish();
+                return true;
+            } else {
+                mClickTime = second;
+                Toast.makeText(this, "再按一次返回键退出", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        }
+        return super.onKeyUp(keyCode, event);
+    }
+
+    protected abstract P initPresenter();
 }

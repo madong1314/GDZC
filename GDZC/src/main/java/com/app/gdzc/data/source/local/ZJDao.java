@@ -13,6 +13,7 @@ import java.sql.SQLException;
  */
 public class ZJDao extends BaseDao<ZJBean, Integer> {
 
+    public static final String ZJ_CREATE = "zj_create";
     public ZJDao(Context context) {
         super(context);
     }

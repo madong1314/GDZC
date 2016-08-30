@@ -1,14 +1,19 @@
-package com.app.gdzc.sbdj.fl;
+package com.app.gdzc.sbdj.view;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.app.gdzc.R;
-import com.app.gdzc.base.BaseActivity;
+import com.app.gdzc.base.BaseFragment;
+import com.app.gdzc.base.IEmptyInterFace;
 import com.app.gdzc.data.bean.SbmkBean;
+import com.app.gdzc.sbdj.adapter.FlAdapter;
+import com.app.gdzc.sbdj.model.SbdjModel;
+import com.app.gdzc.sbdj.presenter.SbdjPresenter;
 import com.pulltofresh.PullToRefreshRecyclerView;
 
 import java.util.ArrayList;
@@ -17,9 +22,9 @@ import java.util.List;
 import butterknife.InjectView;
 
 /**
- * Created by 王少岩 on 2016/8/29.
+ * Created by 王少岩 on 2016/8/30.
  */
-public class FlActivity extends BaseActivity implements FlContract.FlView {
+public class FlhFragment extends BaseFragment<IEmptyInterFace, SbdjModel, SbdjPresenter> implements IFlView {
     @InjectView(R.id.et_search)
     EditText mEditText;
     @InjectView(R.id.rv)
@@ -29,50 +34,39 @@ public class FlActivity extends BaseActivity implements FlContract.FlView {
     private FlAdapter mFlAdapter;
     private List<SbmkBean> mList = new ArrayList<>();
 
-    private FlContract.Presenter mPresenter;
-
     @Override
-    protected void localOnCreate(Bundle savedInstanceState) {
+    protected void localCreateView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_fl);
         setTitle("分类号");
         showLeft();
-        new FlPresenter(this);
         initView();
     }
 
     private void initView() {
-        String flmc = getIntent().getExtras().getString("flmc");
+        String flmc = getArguments().getString("flmc");
         SbmkBean sbmkBean = new SbmkBean();
         sbmkBean.setMc(flmc);
-        mLinearLayoutManager = new LinearLayoutManager(this);
+        mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.getRefreshableView().setLayoutManager(mLinearLayoutManager);
         mRecyclerView.getRefreshableView().setHasFixedSize(true);
-        mFlAdapter = new FlAdapter(this, R.layout.adapter_item_rv, mList);
+        mFlAdapter = new FlAdapter(getActivity(), R.layout.adapter_item_rv, mList);
         mFlAdapter.setSbmkBean(sbmkBean);
         mRecyclerView.getRefreshableView().setAdapter(mFlAdapter);
-        mRecyclerView.setOnRefreshListener(mPresenter);
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        mPresenter.start();
+    protected SbdjPresenter initPresenter() {
+        return new SbdjPresenter(this);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.meun_main, menu);
-        menu.findItem(R.id.action_right).setTitle("确定");
-        return super.onCreateOptionsMenu(menu);
+    public void showDialog() {
+
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_right:
-                break;
-        }
-        return super.onOptionsItemSelected(item);
+    public void hideDialog() {
+
     }
 
     @Override
@@ -82,7 +76,7 @@ public class FlActivity extends BaseActivity implements FlContract.FlView {
 
     @Override
     public void onComplete() {
-        mRecyclerView.onRefreshComplete();
+
     }
 
     @Override
@@ -97,7 +91,18 @@ public class FlActivity extends BaseActivity implements FlContract.FlView {
     }
 
     @Override
-    public void setPresenter(FlContract.Presenter presenter) {
-        mPresenter = presenter;
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.meun_main, menu);
+        menu.findItem(R.id.action_right).setTitle("确定");
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_right:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

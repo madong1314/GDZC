@@ -1,4 +1,4 @@
-package com.app.gdzc.login;
+package com.app.gdzc.login.view;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,12 +8,15 @@ import android.widget.TextView;
 
 import com.app.gdzc.R;
 import com.app.gdzc.base.BaseActivity;
+import com.app.gdzc.login.model.LoginModel;
+import com.app.gdzc.login.presenter.LoginPresenter;
 import com.app.gdzc.main.MainActivity;
 import com.app.gdzc.utils.ENavigate;
+import com.app.gdzc.utils.Utils;
 
 import butterknife.InjectView;
 
-public class LoginActivity extends BaseActivity implements LoginContract.LoginView, View.OnClickListener {
+public class LoginActivity extends BaseActivity<ILoginView, LoginModel, LoginPresenter> implements ILoginView, View.OnClickListener {
     @InjectView(R.id.et_username)
     EditText mEtUserName;
     @InjectView(R.id.et_password)
@@ -26,20 +29,18 @@ public class LoginActivity extends BaseActivity implements LoginContract.LoginVi
     TextView mTvRegister;
     @InjectView(R.id.tv_login)
     TextView mTvLogin;
-    private LoginContract.Presenter mPresenter;
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mPresenter.start();
-    }
 
     @Override
     protected void localOnCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_login);
         init();
-        new LoginPresenter(this);
     }
+
+    @Override
+    protected LoginPresenter initPresenter() {
+        return new LoginPresenter();
+    }
+
     private void init() {
         setOnclickListener(this, mTvLogin, mTvRegister, mTvForget);
     }
@@ -81,11 +82,6 @@ public class LoginActivity extends BaseActivity implements LoginContract.LoginVi
     }
 
     @Override
-    public void setPresenter(LoginContract.Presenter presenter) {
-        mPresenter = presenter;
-    }
-
-    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_login:
@@ -98,4 +94,13 @@ public class LoginActivity extends BaseActivity implements LoginContract.LoginVi
         }
     }
 
+    @Override
+    public void showDialog() {
+        Utils.showLoading(this);
+    }
+
+    @Override
+    public void hideDialog() {
+        Utils.hideLoading();
+    }
 }

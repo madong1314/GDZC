@@ -1,4 +1,4 @@
-package com.app.gdzc.data.bean;
+package com.app.gdzc.login.bean;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;

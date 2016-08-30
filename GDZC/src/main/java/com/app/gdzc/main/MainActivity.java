@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 
 import com.app.gdzc.R;
 import com.app.gdzc.base.BaseActivity;
+import com.app.gdzc.base.BasePresenter;
 import com.app.gdzc.sbdj.SbdjActivity;
 import com.app.gdzc.utils.ENavigate;
 import com.app.gdzc.utils.Utils;
@@ -46,6 +47,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
         setAd();
         setListener();
+    }
+
+    @Override
+    protected BasePresenter initPresenter() {
+        return null;
     }
 
     private void setAd() {

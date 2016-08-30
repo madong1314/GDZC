@@ -1,4 +1,4 @@
-package com.app.gdzc.sbdj.dw;
+package com.app.gdzc.sbdj.adapter;
 
 import android.content.Context;
 import android.view.View;

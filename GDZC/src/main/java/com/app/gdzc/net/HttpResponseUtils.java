@@ -39,7 +39,7 @@ public class HttpResponseUtils {
     }
 
     // volley使用post上传数据
-    public synchronized <T> void sendPost(final int tag, final String url,
+    public synchronized <T> void sendPost(final String tag, final String url,
                                           final Map<String, String> params, final Class<T> clz,
                                           final ResponseListener responseListener, final boolean showLoading) {
         printUrlLog(url,"post",params);
@@ -81,7 +81,7 @@ public class HttpResponseUtils {
     }
 
     // volley使用get上传数据
-    public synchronized <T> void sendGet(final int tag, final String url, final Class<T> clz,
+    public synchronized <T> void sendGet(final String tag, final String url, final Class<T> clz,
                                          final ResponseListener responseListener,  final boolean showLoading) {
         printUrlLog(url,"Get",null);
         if (!checkNetWork(tag, responseListener)) return;
@@ -114,18 +114,18 @@ public class HttpResponseUtils {
 
     }
 
-    public synchronized <T> void sendGet(final int tag, final String url, final Class<T> clz,
+    public synchronized <T> void sendGet(final String tag, final String url, final Class<T> clz,
                                          final ResponseListener responseListener){
         sendGet(tag, url, clz, responseListener, false);
     }
 
-    public synchronized <T> void sendPost(final int tag, final String url,
+    public synchronized <T> void sendPost(final String tag, final String url,
                                           final Map<String, String> params, final Class<T> clz,
                                           final ResponseListener responseListener){
         sendPost(tag, url, params, clz, responseListener, false);
     }
 
-    private boolean checkNetWork(int tag, ResponseListener responseListener) {
+    private boolean checkNetWork(String tag, ResponseListener responseListener) {
         if (!NetStateUtils.isNetworkConnected(mActivity.get())) {
             responseListener.requestError(tag, "请检查网络是否连接");
             return false;

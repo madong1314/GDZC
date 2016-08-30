@@ -5,11 +5,13 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
-import com.app.gdzc.data.source.DataSource;
+import com.app.gdzc.net.ResponseListener;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.Where;
+
+import org.json.JSONException;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -69,7 +71,7 @@ public abstract class BaseDao<T, Integer> {
         for (Map.Entry<String, String> entry : map.entrySet()) {
             where.eq(entry.getKey(), entry.getValue()).and();
         }
-        if(pageNo > 0){
+        if (pageNo > 0) {
             queryBuilder.limit(20);
             queryBuilder.offset(pageNo);
         }
@@ -83,13 +85,15 @@ public abstract class BaseDao<T, Integer> {
         for (Map.Entry<String, String> entry : map.entrySet()) {
             where.like(entry.getKey(), "%" + entry.getValue() + "%").or();
         }
-        queryBuilder.limit(20);
-        queryBuilder.offset(pageNo);
+        if(pageNo>=1){
+            queryBuilder.limit(20);
+            queryBuilder.offset(pageNo);
+        }
         PreparedQuery<T> preparedQuery = queryBuilder.prepare();
         return query(preparedQuery);
     }
 
-    private void getData(final int tag, final int pageNo, final HashMap<String, String> map, final DataSource.Callback<List<T>> callback, final String flag){
+    private void getData(final String tag, final int pageNo, final HashMap<String, String> map, final ResponseListener<List<T>> listener, final String flag) {
         executorService.submit(new Runnable() {
             @Override
             public void run() {
@@ -98,17 +102,21 @@ public abstract class BaseDao<T, Integer> {
                     Handler handler = new Handler() {
                         @Override
                         public void handleMessage(Message msg) {
-                            callback.onComplete(tag, (List<T>) msg.obj);
+                            try {
+                                listener.requestCompleted(tag, (List<T>) msg.obj);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
                     };
                     Message msg = Message.obtain();
-                    switch (flag){
+                    switch (flag) {
                         case FLAG_SEARCH:
                             msg.obj = query(pageNo, map);
-                        break;
+                            break;
                         case FLAG_SEARCH_LIKE:
                             msg.obj = queryLike(pageNo, map);
-                        break;
+                            break;
                     }
                     msg.arg1 = 1;
                     handler.sendMessage(msg);
@@ -120,11 +128,11 @@ public abstract class BaseDao<T, Integer> {
         });
     }
 
-    protected void getDataLike(final int tag, final int pageNo, final HashMap<String, String> maps, final DataSource.Callback<List<T>> callback) {
-        getData(tag, pageNo, maps, callback, FLAG_SEARCH_LIKE);
+    protected void getDataLike(final String tag, final int pageNo, final HashMap<String, String> maps, final ResponseListener<List<T>> listener) {
+        getData(tag, pageNo, maps, listener, FLAG_SEARCH_LIKE);
     }
 
-    protected void getData(final int tag, final int pageNo, final HashMap<String, String> map, final DataSource.Callback<List<T>> callback){
-        getData(tag, pageNo, map, callback, FLAG_SEARCH);
+    protected void getData(final String tag, final int pageNo, final HashMap<String, String> map, final ResponseListener<List<T>> listener) {
+        getData(tag, pageNo, map, listener, FLAG_SEARCH);
     }
 }

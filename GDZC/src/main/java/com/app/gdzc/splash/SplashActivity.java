@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.app.gdzc.R;
-import com.app.gdzc.login.LoginActivity;
+import com.app.gdzc.login.view.LoginActivity;
 import com.app.gdzc.main.MainActivity;
 import com.app.gdzc.utils.ENavigate;
 import com.app.gdzc.utils.SPUtils;
