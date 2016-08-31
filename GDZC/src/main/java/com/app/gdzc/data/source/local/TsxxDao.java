@@ -30,4 +30,14 @@ public class TsxxDao extends BaseDao<TsxxBean, Integer> {
         getDataLike(tag, 0, new HashMap<String, String>(), listener);
     }
 
+    public List<TsxxBean> getDataAll(){
+        List<TsxxBean> list = null;
+        try {
+            list = queryForAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 }

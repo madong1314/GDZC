@@ -3,7 +3,6 @@ package com.app.gdzc.data.source.local;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.Message;
 
 import com.app.gdzc.net.ResponseListener;
 import com.j256.ormlite.dao.Dao;
@@ -90,7 +89,7 @@ public abstract class BaseDao<T, Integer> {
             queryBuilder.offset(pageNo);
             PreparedQuery<T> preparedQuery = queryBuilder.prepare();
             return query(preparedQuery);
-        }else{
+        } else {
             return queryForAll();
         }
     }
@@ -100,29 +99,37 @@ public abstract class BaseDao<T, Integer> {
             @Override
             public void run() {
                 try {
-                    Looper.prepare();
-                    Handler handler = new Handler() {
-                        @Override
-                        public void handleMessage(Message msg) {
-                            try {
-                                listener.requestCompleted(tag, (List<T>) msg.obj);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    };
-                    Message msg = Message.obtain();
+                    Handler handler = new Handler(Looper.getMainLooper());
                     switch (flag) {
-                        case FLAG_SEARCH:
-                            msg.obj = query(pageNo, map);
+                        case FLAG_SEARCH: {
+                            final List<T> list = query(pageNo, map);
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        listener.requestCompleted(tag, list);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
                             break;
-                        case FLAG_SEARCH_LIKE:
-                            msg.obj = queryLike(pageNo, map);
+                        }
+                        case FLAG_SEARCH_LIKE: {
+                            final List<T> list = queryLike(pageNo, map);
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        listener.requestCompleted(tag, list);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
                             break;
+                        }
                     }
-                    msg.arg1 = 1;
-                    handler.sendMessage(msg);
-                    Looper.loop();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
