@@ -1,10 +1,11 @@
 package com.app.gdzc.data.source.local;
 
-import android.content.Context;
+import android.app.Activity;
 import android.os.Handler;
 import android.os.Looper;
 
 import com.app.gdzc.net.ResponseListener;
+import com.app.gdzc.utils.Utils;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
@@ -25,19 +26,19 @@ import java.util.concurrent.Executors;
 public abstract class BaseDao<T, Integer> {
     private ExecutorService executorService = Executors.newFixedThreadPool(5);
     protected DatabaseHelper mDataBaseHelper;
-    protected Context mContext;
+    protected Activity mActivity;
 
     protected final String FLAG_SEARCH = "flag_search";
     protected final String FLAG_SEARCH_LIKE = "flag_search_like";
 
-    protected BaseDao(Context context) {
-        mContext = context;
+    protected BaseDao(Activity activity) {
+        mActivity = activity;
         getHelper();
     }
 
     protected DatabaseHelper getHelper() {
         if (mDataBaseHelper == null) {
-            mDataBaseHelper = DatabaseHelper.getHelper(mContext);
+            mDataBaseHelper = DatabaseHelper.getHelper(mActivity);
         }
         return mDataBaseHelper;
     }
@@ -99,6 +100,7 @@ public abstract class BaseDao<T, Integer> {
             @Override
             public void run() {
                 try {
+//                    Utils.showLoading(mActivity);
                     Handler handler = new Handler(Looper.getMainLooper());
                     switch (flag) {
                         case FLAG_SEARCH: {
@@ -107,6 +109,7 @@ public abstract class BaseDao<T, Integer> {
                                 @Override
                                 public void run() {
                                     try {
+//                                        Utils.hideLoading();
                                         listener.requestCompleted(tag, list);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -121,6 +124,7 @@ public abstract class BaseDao<T, Integer> {
                                 @Override
                                 public void run() {
                                     try {
+//                                        Utils.hideLoading();
                                         listener.requestCompleted(tag, list);
                                     } catch (JSONException e) {
                                         e.printStackTrace();

@@ -1,6 +1,6 @@
 package com.app.gdzc.data.source.local;
 
-import android.content.Context;
+import android.app.Activity;
 import android.util.Log;
 
 import com.app.gdzc.data.bean.LydwBean;
@@ -18,8 +18,8 @@ public class LydwDao extends BaseDao<LydwBean, Integer> {
 
     public static final String LYDWDAO_TAG = "lydwDao";
 
-    public LydwDao(Context context) {
-        super(context);
+    public LydwDao(Activity activity) {
+        super(activity);
     }
 
     @Override

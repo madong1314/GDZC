@@ -1,6 +1,6 @@
 package com.app.gdzc.data.source.local;
 
-import android.content.Context;
+import android.app.Activity;
 
 import com.app.gdzc.data.bean.SbmkBean;
 import com.app.gdzc.net.ResponseListener;
@@ -14,8 +14,9 @@ import java.util.HashMap;
  */
 public class SbmkDao extends BaseDao<SbmkBean, Integer> {
 
-    public SbmkDao(Context context) {
-        super(context);
+    public static final String SBMKDAO_TAG = "sbmkdao";
+    public SbmkDao(Activity activity) {
+        super(activity);
     }
 
     @Override
@@ -23,10 +24,10 @@ public class SbmkDao extends BaseDao<SbmkBean, Integer> {
         return getHelper().getDao(SbmkBean.class);
     }
 
-    public void getData(String tag, int pageNo, String str, ResponseListener listener) {
+    public void getData(int pageNo, String keyWord, ResponseListener listener) {
         HashMap<String, String> map = new HashMap<>();
-        map.put("FLH", str);
-        map.put("MC", str);
-        getDataLike(tag, pageNo, map, listener);
+        map.put("FLH", keyWord);
+        map.put("MC", keyWord);
+        getDataLike(SBMKDAO_TAG, pageNo, map, listener);
     }
 }

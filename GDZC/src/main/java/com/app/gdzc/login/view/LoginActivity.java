@@ -12,7 +12,6 @@ import com.app.gdzc.login.model.LoginModel;
 import com.app.gdzc.login.presenter.LoginPresenter;
 import com.app.gdzc.main.MainActivity;
 import com.app.gdzc.utils.ENavigate;
-import com.app.gdzc.utils.Utils;
 
 import butterknife.InjectView;
 
@@ -38,7 +37,7 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginModel, LoginPre
 
     @Override
     protected LoginPresenter initPresenter() {
-        return new LoginPresenter();
+        return new LoginPresenter(this);
     }
 
     private void init() {
@@ -94,13 +93,4 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginModel, LoginPre
         }
     }
 
-    @Override
-    public void showDialog() {
-        Utils.showLoading(this);
-    }
-
-    @Override
-    public void hideDialog() {
-        Utils.hideLoading();
-    }
 }

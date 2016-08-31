@@ -12,13 +12,16 @@ import com.app.gdzc.data.bean.TsxxBean;
 import com.app.gdzc.recycleview.CommonAdapter;
 import com.app.gdzc.recycleview.ViewHolder;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by 王少岩 on 2016/8/30.
  */
 public class SbdjAdapter extends CommonAdapter<TsxxBean> {
-    private String[] etValArr;
+    private String[] colArr,etValArr;
+    private Map<String, String> SbdjMap = new HashMap<>();
     private FlhListener mFlhListener;
     private LydwListener mLydwListener;
     public String dwmc;
@@ -28,7 +31,7 @@ public class SbdjAdapter extends CommonAdapter<TsxxBean> {
     }
 
     @Override
-    public void convert(final ViewHolder holder, TsxxBean tsxxBean) {
+    public void convert(final ViewHolder holder, final TsxxBean tsxxBean) {
         holder.setText(R.id.tv_label, tsxxBean.getShowContent());
         holder.setHintText(R.id.et_input, tsxxBean.getHintContent());
         holder.setHintText(R.id.tv_input, tsxxBean.getHintContent());
@@ -42,7 +45,7 @@ public class SbdjAdapter extends CommonAdapter<TsxxBean> {
         }
 
         EditText et = holder.getView(R.id.et_input);
-        TextView tv = holder.getView(R.id.tv_input);
+        final TextView tv = holder.getView(R.id.tv_input);
         switch (tsxxBean.getColNameEng()) {
             case "flh":
                 et.setVisibility(View.GONE);
@@ -50,7 +53,7 @@ public class SbdjAdapter extends CommonAdapter<TsxxBean> {
                 tv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mFlhListener.onFlhClickListener();
+                        mFlhListener.onFlhClickListener(tv);
                     }
                 });
                 break;
@@ -61,7 +64,7 @@ public class SbdjAdapter extends CommonAdapter<TsxxBean> {
                 tv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mLydwListener.onLydwClickListener();
+                        mLydwListener.onLydwClickListener(tv);
                     }
                 });
                 break;
@@ -77,11 +80,12 @@ public class SbdjAdapter extends CommonAdapter<TsxxBean> {
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
                         etValArr[holder.mPosition] = s.toString();
+                        colArr[holder.mPosition] = tsxxBean.getShowContent();
+                        SbdjMap.put(colArr[holder.mPosition], etValArr[holder.mPosition]);
                     }
 
                     @Override
                     public void afterTextChanged(Editable s) {
-
                     }
                 });
                 break;
@@ -91,14 +95,23 @@ public class SbdjAdapter extends CommonAdapter<TsxxBean> {
 
     public void initEtVal(int size) {
         etValArr = new String[size];
+        colArr = new String[size];
     }
 
-    public interface FlhListener{
-        void onFlhClickListener();
+    public String[] getEtValArr() {
+        return etValArr;
     }
 
-    public interface LydwListener{
-        void onLydwClickListener();
+    public Map<String, String> getSbdjMap() {
+        return SbdjMap;
+    }
+
+    public interface FlhListener {
+        void onFlhClickListener(TextView v);
+    }
+
+    public interface LydwListener {
+        void onLydwClickListener(TextView v);
     }
 
     public void setFlhListener(FlhListener flhListener) {

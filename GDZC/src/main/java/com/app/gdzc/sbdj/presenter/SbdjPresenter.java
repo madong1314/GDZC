@@ -1,11 +1,15 @@
 package com.app.gdzc.sbdj.presenter;
 
+import android.app.Activity;
+
 import com.app.gdzc.base.BaseApplication;
 import com.app.gdzc.base.BasePresenter;
 import com.app.gdzc.base.IEmptyInterFace;
 import com.app.gdzc.data.bean.LydwBean;
+import com.app.gdzc.data.bean.SbmkBean;
 import com.app.gdzc.data.bean.TsxxBean;
 import com.app.gdzc.data.source.local.LydwDao;
+import com.app.gdzc.data.source.local.SbmkDao;
 import com.app.gdzc.data.source.local.TsxxDao;
 import com.app.gdzc.data.source.local.ZJDao;
 import com.app.gdzc.net.ResponseListener;
@@ -28,21 +32,24 @@ public class SbdjPresenter extends BasePresenter<IEmptyInterFace, SbdjModel> imp
     private IDwView mDwView;
     private IFlView mFlView;
 
-    public SbdjPresenter(ISbdjView sbdjView) {
+    public SbdjPresenter(Activity activity, ISbdjView sbdjView) {
+        mActivity = activity;
         mSbdjView = sbdjView;
     }
 
-    public SbdjPresenter(IDwView dwView) {
+    public SbdjPresenter(Activity activity, IDwView dwView) {
+        mActivity = activity;
         mDwView = dwView;
     }
 
-    public SbdjPresenter(IFlView flView) {
+    public SbdjPresenter(Activity activity, IFlView flView) {
+        mActivity = activity;
         mFlView = flView;
     }
 
     @Override
     protected SbdjModel initModel() {
-        return new SbdjModel(BaseApplication.getAppContext());
+        return new SbdjModel(mActivity);
     }
 
     @Override
@@ -56,6 +63,12 @@ public class SbdjPresenter extends BasePresenter<IEmptyInterFace, SbdjModel> imp
             case LydwDao.LYDWDAO_TAG: {
                 List<LydwBean> list = (List<LydwBean>) response;
                 mDwView.showView(list);
+                break;
+            }
+            case SbmkDao.SBMKDAO_TAG: {
+                List<SbmkBean> list = (List<SbmkBean>) response;
+                mFlView.showView(list);
+                mFlView.onComplete();
                 break;
             }
             case ZJDao.ZJ_CREATE:
@@ -79,5 +92,9 @@ public class SbdjPresenter extends BasePresenter<IEmptyInterFace, SbdjModel> imp
 
     public void getDw() {
         mModel.getDw(this);
+    }
+
+    public void getFlh(int pageNo, String keyWord) {
+        mModel.getFlh(pageNo, keyWord, this);
     }
 }

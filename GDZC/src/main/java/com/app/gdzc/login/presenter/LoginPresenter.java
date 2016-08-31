@@ -1,5 +1,6 @@
 package com.app.gdzc.login.presenter;
 
+import android.app.Activity;
 import android.text.TextUtils;
 
 import com.app.gdzc.R;
@@ -22,6 +23,10 @@ import java.util.List;
  */
 public class LoginPresenter extends BasePresenter<ILoginView, LoginModel> implements ResponseListener<List<LoginBean>> {
 
+    public LoginPresenter(Activity activity) {
+        mActivity = activity;
+    }
+
     public void login() {
         if (TextUtils.isEmpty(mView.getUserName())) {
             Utils.showToast(BaseApplication.getAppContext(), BaseApplication.getAppContext().getString(R.string.empty_username));
@@ -38,18 +43,16 @@ public class LoginPresenter extends BasePresenter<ILoginView, LoginModel> implem
         loginBean.setPassWord(mView.getPassWord());
 
         //根据输入的用户名和密码查询数据库
-        mView.showDialog();
         mModel.login(loginBean, this);
     }
 
     @Override
     protected LoginModel initModel() {
-        return new LoginModel(BaseApplication.getAppContext());
+        return new LoginModel(mActivity);
     }
 
     @Override
     public void requestCompleted(String tag, List<LoginBean> list) throws JSONException {
-        mView.hideDialog();
         switch (tag) {
             case LoginDao.LOGIN_TAG:
                 if (list.size() > 0) {
@@ -68,7 +71,6 @@ public class LoginPresenter extends BasePresenter<ILoginView, LoginModel> implem
 
     @Override
     public void requestError(String tag, String error) {
-        mView.hideDialog();
         switch (tag) {
             case LoginDao.LOGIN_TAG:
                 Utils.showToast(BaseApplication.getAppContext(), error);

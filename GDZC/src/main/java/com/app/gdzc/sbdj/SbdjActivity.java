@@ -60,9 +60,6 @@ public class SbdjActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != RESULT_OK) return;
-        switch (requestCode) {
-            case 1000:
-                break;
-        }
+        mSbdjFragment.onActivityResult(requestCode, resultCode, data);
     }
 }

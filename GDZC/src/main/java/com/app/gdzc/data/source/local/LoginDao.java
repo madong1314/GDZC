@@ -1,6 +1,6 @@
 package com.app.gdzc.data.source.local;
 
-import android.content.Context;
+import android.app.Activity;
 
 import com.app.gdzc.login.bean.LoginBean;
 import com.app.gdzc.net.ResponseListener;
@@ -15,8 +15,8 @@ import java.util.HashMap;
 public class LoginDao extends BaseDao<LoginBean, Integer> {
 
     public static final String LOGIN_TAG = "login";
-    public LoginDao(Context context) {
-        super(context);
+    public LoginDao(Activity activity) {
+        super(activity);
     }
 
     @Override

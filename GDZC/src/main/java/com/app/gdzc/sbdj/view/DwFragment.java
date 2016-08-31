@@ -55,7 +55,7 @@ public class DwFragment extends BaseFragment<IEmptyInterFace, SbdjModel, SbdjPre
 
     @Override
     protected SbdjPresenter initPresenter() {
-        return new SbdjPresenter(this);
+        return new SbdjPresenter(getActivity(), this);
     }
 
     @Override
@@ -84,15 +84,5 @@ public class DwFragment extends BaseFragment<IEmptyInterFace, SbdjModel, SbdjPre
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void showDialog() {
-
-    }
-
-    @Override
-    public void hideDialog() {
-
     }
 }

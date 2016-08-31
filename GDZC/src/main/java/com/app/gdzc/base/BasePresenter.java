@@ -1,9 +1,12 @@
 package com.app.gdzc.base;
 
+import android.app.Activity;
+
 /**
  * Created by 王少岩 on 2016/8/16.
  */
 public abstract class BasePresenter<V, M> {
+    protected Activity mActivity;
     protected V mView;
     protected M mModel;
 

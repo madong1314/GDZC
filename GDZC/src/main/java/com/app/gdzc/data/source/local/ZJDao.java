@@ -1,6 +1,6 @@
 package com.app.gdzc.data.source.local;
 
-import android.content.Context;
+import android.app.Activity;
 
 import com.app.gdzc.data.bean.ZJBean;
 import com.app.gdzc.data.source.DataSource;
@@ -14,8 +14,8 @@ import java.sql.SQLException;
 public class ZJDao extends BaseDao<ZJBean, Integer> {
 
     public static final String ZJ_CREATE = "zj_create";
-    public ZJDao(Context context) {
-        super(context);
+    public ZJDao(Activity activity) {
+        super(activity);
     }
 
     @Override

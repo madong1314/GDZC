@@ -1,6 +1,6 @@
 package com.app.gdzc.data.source.local;
 
-import android.content.Context;
+import android.app.Activity;
 
 import com.app.gdzc.data.bean.TsxxBean;
 import com.app.gdzc.net.ResponseListener;
@@ -17,8 +17,8 @@ public class TsxxDao extends BaseDao<TsxxBean, Integer> {
 
     public static final String TSXX_TAG = "tsxx";
 
-    public TsxxDao(Context context) {
-        super(context);
+    public TsxxDao(Activity activity) {
+        super(activity);
     }
 
     @Override
