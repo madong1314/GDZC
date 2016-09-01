@@ -27,7 +27,7 @@ public class TsxxDao extends BaseDao<TsxxBean, Integer> {
     }
 
     public void getData(String tag, ResponseListener<List<TsxxBean>> listener) {
-        getDataLike(tag, 0, new HashMap<String, String>(), listener);
+        getData(tag, 0, new HashMap<String, String>(), listener);
     }
 
     public List<TsxxBean> getDataAll(){

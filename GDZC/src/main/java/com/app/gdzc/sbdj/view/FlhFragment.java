@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.app.gdzc.R;
 import com.app.gdzc.base.BaseFragment;
 import com.app.gdzc.base.IEmptyInterFace;
-import com.app.gdzc.data.bean.SbmkBean;
+import com.app.gdzc.data.bean.FlhBean;
 import com.app.gdzc.sbdj.adapter.FlAdapter;
 import com.app.gdzc.sbdj.model.SbdjModel;
 import com.app.gdzc.sbdj.presenter.SbdjPresenter;
@@ -39,7 +39,7 @@ public class FlhFragment extends BaseFragment<IEmptyInterFace, SbdjModel, SbdjPr
 
     private LinearLayoutManager mLinearLayoutManager;
     private FlAdapter mFlAdapter;
-    private List<SbmkBean> mList = new ArrayList<>();
+    private List<FlhBean> mList = new ArrayList<>();
     private int pageNo = 1;
     @Override
     protected void localCreateView(Bundle savedInstanceState) {
@@ -52,9 +52,11 @@ public class FlhFragment extends BaseFragment<IEmptyInterFace, SbdjModel, SbdjPr
     }
 
     private void initView() {
-        String flmc = getArguments().getString("flmc", "");
-        SbmkBean sbmkBean = new SbmkBean();
-        sbmkBean.setMc(flmc);
+        String code = getArguments().getString("code", "");
+        String value = getArguments().getString("value", "");
+        FlhBean sbmkBean = new FlhBean();
+        sbmkBean.setFlh(code);
+        sbmkBean.setMc(value);
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.getRefreshableView().setLayoutManager(mLinearLayoutManager);
         mRecyclerView.getRefreshableView().setHasFixedSize(true);
@@ -74,7 +76,7 @@ public class FlhFragment extends BaseFragment<IEmptyInterFace, SbdjModel, SbdjPr
     }
 
     @Override
-    public void showView(List<SbmkBean> list) {
+    public void showView(List<FlhBean> list) {
         if(pageNo == 1){
             mList.clear();
         }

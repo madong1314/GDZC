@@ -14,6 +14,7 @@ import com.app.gdzc.data.bean.LydwBean;
 import com.app.gdzc.sbdj.adapter.DwAdapter;
 import com.app.gdzc.sbdj.model.SbdjModel;
 import com.app.gdzc.sbdj.presenter.SbdjPresenter;
+import com.pulltofresh.PullToRefreshBase;
 import com.pulltofresh.PullToRefreshRecyclerView;
 
 import java.util.ArrayList;
@@ -42,9 +43,12 @@ public class DwFragment extends BaseFragment<IEmptyInterFace, SbdjModel, SbdjPre
     }
 
     private void initView(){
-        String dwmc = getArguments().getString("dwmc", "");
+        String code = getArguments().getString("code", "");
+        String value = getArguments().getString("value", "");
         LydwBean lydwBean = new LydwBean();
-        lydwBean.setDwmc(dwmc);
+        lydwBean.setDwbh(code);
+        lydwBean.setDwmc(value);
+        mRecyclerView.setMode(PullToRefreshBase.Mode.DISABLED);
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.getRefreshableView().setLayoutManager(mLinearLayoutManager);
         mRecyclerView.getRefreshableView().setHasFixedSize(true);

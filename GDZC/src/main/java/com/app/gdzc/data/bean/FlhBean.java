@@ -7,13 +7,13 @@ import com.j256.ormlite.table.DatabaseTable;
  * Created by 王少岩 on 2016/8/29.
  */
 @DatabaseTable(tableName = "S_SBMK")
-public class SbmkBean {
+public class FlhBean {
     @DatabaseField(columnName = "FLH")
     private String flh;
     @DatabaseField(columnName = "MC")
     private String mc;
 
-    public SbmkBean() {
+    public FlhBean() {
     }
 
     public String getFlh() {

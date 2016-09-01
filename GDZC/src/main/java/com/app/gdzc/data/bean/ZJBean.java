@@ -279,10 +279,12 @@ public class ZJBean {
     public static boolean isCorrect(Map<String, String> map, List<TsxxBean> list){
         boolean isCorrect = true;
         for(TsxxBean bean:list){
-            if(!map.keySet().contains(bean.getShowContent())){
-                isCorrect = false;
-                Utils.showToast(BaseApplication.getAppContext(), bean.getHintContent());
-                return isCorrect;
+            if(bean.getCanBeNull().equals("1")){
+                if(!map.keySet().contains(bean.getShowContent())){
+                    isCorrect = false;
+                    Utils.showToast(BaseApplication.getAppContext(), bean.getHintContent());
+                    return isCorrect;
+                }
             }
         }
         return isCorrect;

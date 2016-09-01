@@ -1,1 +1,1 @@
-include ':gdzc', ':viewpagerindicator', ':pulltofresh'
+include ':gdzc', ':viewpagerindicator', ':pulltofresh', ':pickerview'

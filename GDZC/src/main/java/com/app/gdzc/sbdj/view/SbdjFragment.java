@@ -23,7 +23,10 @@ import com.app.gdzc.sbdj.SbdjActivity;
 import com.app.gdzc.sbdj.model.SbdjModel;
 import com.app.gdzc.sbdj.presenter.SbdjPresenter;
 import com.app.gdzc.utils.ENavigate;
+import com.bigkoo.pickerview.TimePickerView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,11 +43,12 @@ public class SbdjFragment extends BaseFragment<IEmptyInterFace, SbdjModel, SbdjP
 
     private Map<String, String> SbdeMap = new HashMap<>();
     private List<TsxxBean> mList;
-    private TextView mLydw, mFlh;
+    private TextView mTempTv;
 
-    public static final int REQ_DWFRAGMENT = 1000;
-    public static final int REQ_FLHFRAGMENT = 1001;
+    public static final int requestCode = 1000;
 
+    private TimePickerView popTime;
+    private String time_tag;
 
     @Override
     protected void localCreateView(Bundle savedInstanceState) {
@@ -52,6 +56,23 @@ public class SbdjFragment extends BaseFragment<IEmptyInterFace, SbdjModel, SbdjP
         setTitle("设备登记");
         showLeft();
         mPresenter.getTsxx();
+        initTimePicker();
+    }
+
+    private void initTimePicker() {
+        popTime = new TimePickerView(getActivity(), TimePickerView.Type.YEAR_MONTH_DAY);
+        popTime.setTitle("选择时间");
+        popTime.setTime(new Date());
+        popTime.setCyclic(false);
+        popTime.setCancelable(true);
+        popTime.setOnTimeSelectListener(new TimePickerView.OnTimeSelectListener() {
+            @Override
+            public void onTimeSelect(Date date) {
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                mTempTv.setText(format.format(date));
+                SbdeMap.put(time_tag, format.format(date));
+            }
+        });
     }
 
     @Override
@@ -62,17 +83,17 @@ public class SbdjFragment extends BaseFragment<IEmptyInterFace, SbdjModel, SbdjP
     @Override
     public void showView(List<TsxxBean> list) {
         mList = list;
-        LayoutInflater inflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        for(final TsxxBean tsxxBean : list){
+        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        for (final TsxxBean tsxxBean : list) {
             View view = inflater.inflate(R.layout.layout_input_sbdj, null);
             TextView tv = (TextView) view.findViewById(R.id.tv_label);
             EditText et_input = (EditText) view.findViewById(R.id.et_input);
             final TextView tv_input = (TextView) view.findViewById(R.id.tv_input);
             TextView canbenull = (TextView) view.findViewById(R.id.tv_canbenull);
             tv.setText(tsxxBean.getShowContent());
-            canbenull.setVisibility(tsxxBean.getCanBeNull().equals("1")?View.VISIBLE:View.GONE);
+            canbenull.setVisibility(tsxxBean.getCanBeNull().equals("1") ? View.VISIBLE : View.GONE);
 
-            switch (tsxxBean.getColNameEng()){
+            switch (tsxxBean.getColNameEng()) {
                 case "flh":
                     tv_input.setVisibility(View.VISIBLE);
                     et_input.setVisibility(View.GONE);
@@ -80,11 +101,13 @@ public class SbdjFragment extends BaseFragment<IEmptyInterFace, SbdjModel, SbdjP
                     tv_input.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            mFlh = tv_input;
+                            mTempTv = tv_input;
                             Bundle bundle = new Bundle();
-                            bundle.putString("flmc", tv_input.getText().toString());
+                            bundle.putString("title", tsxxBean.getShowContent());
+                            bundle.putString("code", tv_input.getHint().toString());
+                            bundle.putString("value", tv_input.getText().toString());
                             bundle.putString(SbdjActivity.FRAGMENT, SbdjActivity.FLHFRAGMENT);
-                            ENavigate.startActivityForResult(getActivity(), SbdjActivity.class, REQ_FLHFRAGMENT, bundle);
+                            ENavigate.startActivityForResult(getActivity(), SbdjActivity.class, requestCode, bundle);
                         }
                     });
                     break;
@@ -95,11 +118,48 @@ public class SbdjFragment extends BaseFragment<IEmptyInterFace, SbdjModel, SbdjP
                     tv_input.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            mLydw = tv_input;
+                            mTempTv = tv_input;
                             Bundle bundle = new Bundle();
-                            bundle.putString("dwmc", tv_input.getText().toString());
+                            bundle.putString("title", tsxxBean.getShowContent());
+                            bundle.putString("code", tv_input.getHint().toString());
+                            bundle.putString("value", tv_input.getText().toString());
                             bundle.putString(SbdjActivity.FRAGMENT, SbdjActivity.DWFRAGMENT);
-                            ENavigate.startActivityForResult(getActivity(), SbdjActivity.class, REQ_DWFRAGMENT, bundle);
+                            ENavigate.startActivityForResult(getActivity(), SbdjActivity.class, requestCode, bundle);
+                        }
+                    });
+                    break;
+                case "xz":
+                case "sbly":
+                case "syfx":
+                case "jfkm":
+                    tv_input.setVisibility(View.VISIBLE);
+                    et_input.setVisibility(View.GONE);
+                    tv_input.setHint(tsxxBean.getHintContent());
+                    tv_input.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mTempTv = tv_input;
+                            Bundle bundle = new Bundle();
+                            bundle.putString("title", tsxxBean.getShowContent());
+                            bundle.putString("code", tv_input.getHint().toString());
+                            bundle.putString("value", tv_input.getText().toString());
+                            bundle.putString(SbdjActivity.FRAGMENT, SbdjActivity.MKFRAGMENT);
+                            ENavigate.startActivityForResult(getActivity(), SbdjActivity.class, requestCode, bundle);
+                        }
+                    });
+                    break;
+                case "gzrq":
+                case "ccrq":
+                case "bxrq":
+                    tv_input.setVisibility(View.VISIBLE);
+                    et_input.setVisibility(View.GONE);
+                    tv_input.setHint(tsxxBean.getHintContent());
+                    tv_input.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mTempTv = tv_input;
+                            time_tag = tsxxBean.getShowContent();
+                            popTime.show();
                         }
                     });
                     break;
@@ -107,10 +167,12 @@ public class SbdjFragment extends BaseFragment<IEmptyInterFace, SbdjModel, SbdjP
                     et_input.setHint(tsxxBean.getHintContent());
                     et_input.addTextChangedListener(new TextWatcher() {
                         @Override
-                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                        }
 
                         @Override
-                        public void onTextChanged(CharSequence s, int start, int before, int count) {}
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        }
 
                         @Override
                         public void afterTextChanged(Editable s) {
@@ -136,6 +198,7 @@ public class SbdjFragment extends BaseFragment<IEmptyInterFace, SbdjModel, SbdjP
             case R.id.action_right:
                 if (ZJBean.isCorrect(SbdeMap, mList)) {
                     ZJBean zjBean = ZJBean.mapToZJBean(SbdeMap);
+                    mPresenter.createZJ(zjBean);
                 }
                 break;
         }
@@ -145,13 +208,7 @@ public class SbdjFragment extends BaseFragment<IEmptyInterFace, SbdjModel, SbdjP
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         SbdeMap.put(data.getStringExtra("colName"), data.getStringExtra("colCode"));
-        switch (requestCode) {
-            case REQ_DWFRAGMENT:
-                mLydw.setText(data.getStringExtra("colValue"));
-                break;
-            case REQ_FLHFRAGMENT:
-                mFlh.setText(data.getStringExtra("colValue"));
-                break;
-        }
+        mTempTv.setText(data.getStringExtra("colValue"));
+        mTempTv.setHint(data.getStringExtra("colCode"));
     }
 }

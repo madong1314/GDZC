@@ -1,6 +1,6 @@
 package com.app.gdzc.sbdj.view;
 
-import com.app.gdzc.data.bean.SbmkBean;
+import com.app.gdzc.data.bean.FlhBean;
 
 import java.util.List;
 
@@ -9,5 +9,5 @@ import java.util.List;
  */
 public interface IFlView {
     void onComplete();
-    void showView(List<SbmkBean> list);
+    void showView(List<FlhBean> list);
 }

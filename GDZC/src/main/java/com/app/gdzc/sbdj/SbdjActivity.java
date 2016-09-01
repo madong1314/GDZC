@@ -8,6 +8,7 @@ import com.app.gdzc.base.BaseActivity;
 import com.app.gdzc.base.BasePresenter;
 import com.app.gdzc.sbdj.view.DwFragment;
 import com.app.gdzc.sbdj.view.FlhFragment;
+import com.app.gdzc.sbdj.view.MkFragment;
 import com.app.gdzc.sbdj.view.SbdjFragment;
 import com.app.gdzc.utils.ActivityUtils;
 
@@ -19,11 +20,13 @@ public class SbdjActivity extends BaseActivity {
     private SbdjFragment mSbdjFragment;
     private DwFragment mDwFragment;
     private FlhFragment mFlhFragment;
+    private MkFragment mMkFragment;
 
     public static final String FRAGMENT = "fragment";
     public static final String SBDJFRAGMENT = "SbdjFragment";
     public static final String DWFRAGMENT = "DwFragment";
     public static final String FLHFRAGMENT = "FlhFragment";
+    public static final String MKFRAGMENT = "MKFRAGMENT";
 
     @Override
     protected void localOnCreate(Bundle savedInstanceState) {
@@ -37,15 +40,25 @@ public class SbdjActivity extends BaseActivity {
                 break;
             case DWFRAGMENT:
                 mDwFragment = new DwFragment();
-                bundle.putString("dwmc", getIntent().getExtras().getString("dwmc"));
+                bundle.putString("code", getIntent().getExtras().getString("code"));
+                bundle.putString("value", getIntent().getExtras().getString("value"));
                 mDwFragment.setArguments(bundle);
                 ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), mDwFragment, R.id.contentFrame);
                 break;
             case FLHFRAGMENT:
                 mFlhFragment = new FlhFragment();
-                bundle.putString("flmc", getIntent().getExtras().getString("flmc"));
+                bundle.putString("code", getIntent().getExtras().getString("code"));
+                bundle.putString("value", getIntent().getExtras().getString("value"));
                 mFlhFragment.setArguments(bundle);
                 ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), mFlhFragment, R.id.contentFrame);
+                break;
+            case MKFRAGMENT:
+                mMkFragment = new MkFragment();
+                bundle.putString("title", getIntent().getExtras().getString("title"));
+                bundle.putString("code", getIntent().getExtras().getString("code"));
+                bundle.putString("value", getIntent().getExtras().getString("value"));
+                mMkFragment.setArguments(bundle);
+                ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), mMkFragment, R.id.contentFrame);
                 break;
         }
     }

@@ -3,8 +3,10 @@ package com.app.gdzc.data.source.local;
 import android.app.Activity;
 
 import com.app.gdzc.data.bean.ZJBean;
-import com.app.gdzc.data.source.DataSource;
+import com.app.gdzc.net.ResponseListener;
 import com.j256.ormlite.dao.Dao;
+
+import org.json.JSONException;
 
 import java.sql.SQLException;
 
@@ -14,6 +16,7 @@ import java.sql.SQLException;
 public class ZJDao extends BaseDao<ZJBean, Integer> {
 
     public static final String ZJ_CREATE = "zj_create";
+
     public ZJDao(Activity activity) {
         super(activity);
     }
@@ -23,14 +26,17 @@ public class ZJDao extends BaseDao<ZJBean, Integer> {
         return getHelper().getDao(ZJBean.class);
     }
 
-    public void createZJ(int tag, ZJBean zjBean, DataSource.Callback callback){
+    public void createZJ(ZJBean zjBean, ResponseListener listener) {
         try {
-            if(save(zjBean)>0)
-                callback.onComplete(tag, zjBean);
+            if (save(zjBean) > 0)
+                listener.requestCompleted(ZJ_CREATE, zjBean);
             else
-                callback.onError(tag,"保存失败");
+                listener.requestError(ZJ_CREATE, "保存失败");
+        } catch (JSONException e) {
+            listener.requestError(ZJ_CREATE, "保存失败");
+            e.printStackTrace();
         } catch (SQLException e) {
-            callback.onError(tag,"保存失败");
+            listener.requestError(ZJ_CREATE, "保存失败");
             e.printStackTrace();
         }
     }

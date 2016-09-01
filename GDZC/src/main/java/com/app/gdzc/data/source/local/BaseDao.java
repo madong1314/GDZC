@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.app.gdzc.net.ResponseListener;
-import com.app.gdzc.utils.Utils;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
@@ -29,7 +28,11 @@ public abstract class BaseDao<T, Integer> {
     protected Activity mActivity;
 
     protected final String FLAG_SEARCH = "flag_search";
-    protected final String FLAG_SEARCH_LIKE = "flag_search_like";
+    protected final String FLAG_SEARCH_OR_LIKE = "flag_search_or_like";
+    protected final String FLAG_SEARCH_AND_LIKE = "flag_search_and_like";
+
+    protected final String LEFT = "left";
+    protected final String RIGHT = "right";
 
     protected BaseDao(Activity activity) {
         mActivity = activity;
@@ -67,9 +70,11 @@ public abstract class BaseDao<T, Integer> {
 
     private List<T> query(int pageNo, HashMap<String, String> map) throws SQLException {
         QueryBuilder<T, Integer> queryBuilder = getDao().queryBuilder();
-        Where<T, Integer> where = queryBuilder.where();
-        for (Map.Entry<String, String> entry : map.entrySet()) {
-            where.eq(entry.getKey(), entry.getValue()).and();
+        if (map.size() > 0) {
+            Where<T, Integer> where = queryBuilder.where();
+            for (Map.Entry<String, String> entry : map.entrySet()) {
+                where.eq(entry.getKey(), entry.getValue()).and();
+            }
         }
         if (pageNo > 0) {
             queryBuilder.limit(20);
@@ -79,23 +84,49 @@ public abstract class BaseDao<T, Integer> {
         return query(preparedQuery);
     }
 
-    private List<T> queryLike(int pageNo, HashMap<String, String> map) throws SQLException {
-        if (pageNo >= 1) {
-            QueryBuilder<T, Integer> queryBuilder = getDao().queryBuilder();
+    private List<T> queryOrLike(int pageNo, HashMap<String, String> map) throws SQLException {
+        QueryBuilder<T, Integer> queryBuilder = getDao().queryBuilder();
+        if (map.size() > 0) {
             Where<T, Integer> where = queryBuilder.where();
             for (Map.Entry<String, String> entry : map.entrySet()) {
                 where.like(entry.getKey(), "%" + entry.getValue() + "%").or();
             }
+        }
+        if (pageNo >= 1) {
             queryBuilder.limit(20);
             queryBuilder.offset(pageNo);
-            PreparedQuery<T> preparedQuery = queryBuilder.prepare();
-            return query(preparedQuery);
-        } else {
-            return queryForAll();
         }
+        PreparedQuery<T> preparedQuery = queryBuilder.prepare();
+        return query(preparedQuery);
     }
 
-    private void getData(final String tag, final int pageNo, final HashMap<String, String> map, final ResponseListener<List<T>> listener, final String flag) {
+    private List<T> queryAndLike(int pageNo, HashMap<String, String> map, String likeFlag) throws SQLException {
+        QueryBuilder<T, Integer> queryBuilder = getDao().queryBuilder();
+        if (map.size() > 0) {
+            Where<T, Integer> where = queryBuilder.where();
+            for (Map.Entry<String, String> entry : map.entrySet()) {
+                switch (likeFlag){
+                    case LEFT:
+                        where.like(entry.getKey(), "%" + entry.getValue()).and();
+                    break;
+                    case RIGHT:
+                    where.like(entry.getKey(), entry.getValue() + "%").and();
+                    break;
+                    default:
+                        where.like(entry.getKey(), "%"+ entry.getValue() + "%").and();
+                    break;
+                }
+            }
+        }
+        if (pageNo >= 1) {
+            queryBuilder.limit(20);
+            queryBuilder.offset(pageNo);
+        }
+        PreparedQuery<T> preparedQuery = queryBuilder.prepare();
+        return query(preparedQuery);
+    }
+
+    private void getData(final String tag, final int pageNo, final HashMap<String, String> map, final ResponseListener<List<T>> listener, final String flag, final String likeFlag) {
         executorService.submit(new Runnable() {
             @Override
             public void run() {
@@ -118,8 +149,23 @@ public abstract class BaseDao<T, Integer> {
                             });
                             break;
                         }
-                        case FLAG_SEARCH_LIKE: {
-                            final List<T> list = queryLike(pageNo, map);
+                        case FLAG_SEARCH_OR_LIKE: {
+                            final List<T> list = queryOrLike(pageNo, map);
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+//                                        Utils.hideLoading();
+                                        listener.requestCompleted(tag, list);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+                            break;
+                        }
+                        case FLAG_SEARCH_AND_LIKE: {
+                            final List<T> list = queryAndLike(pageNo, map, likeFlag);
                             handler.post(new Runnable() {
                                 @Override
                                 public void run() {
@@ -135,17 +181,22 @@ public abstract class BaseDao<T, Integer> {
                         }
                     }
                 } catch (SQLException e) {
+                    listener.requestError(tag, "查询失败");
                     e.printStackTrace();
                 }
             }
         });
     }
 
-    protected void getDataLike(final String tag, final int pageNo, final HashMap<String, String> maps, final ResponseListener<List<T>> listener) {
-        getData(tag, pageNo, maps, listener, FLAG_SEARCH_LIKE);
+    protected void getDataOrLike(String tag, int pageNo, HashMap<String, String> maps, ResponseListener<List<T>> listener) {
+        getData(tag, pageNo, maps, listener, FLAG_SEARCH_OR_LIKE, "");
     }
 
-    protected void getData(final String tag, final int pageNo, final HashMap<String, String> map, final ResponseListener<List<T>> listener) {
-        getData(tag, pageNo, map, listener, FLAG_SEARCH);
+    protected void getDataAndLike(String tag, int pageNo, HashMap<String, String> maps, ResponseListener<List<T>> listener, String likeFlag) {
+        getData(tag, pageNo, maps, listener, FLAG_SEARCH_AND_LIKE, likeFlag);
+    }
+
+    protected void getData(String tag, int pageNo, HashMap<String, String> map, ResponseListener<List<T>> listener) {
+        getData(tag, pageNo, map, listener, FLAG_SEARCH, "");
     }
 }
