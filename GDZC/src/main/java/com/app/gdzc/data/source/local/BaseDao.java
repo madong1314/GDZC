@@ -68,9 +68,9 @@ public abstract class BaseDao<T, Integer> {
         return getDao().queryForAll();
     }
 
-    private List<T> query(int pageNo, HashMap<String, String> map) throws SQLException {
+    protected List<T> query(int pageNo, HashMap<String, String> map) throws SQLException {
         QueryBuilder<T, Integer> queryBuilder = getDao().queryBuilder();
-        if (map.size() > 0) {
+        if (map != null) {
             Where<T, Integer> where = queryBuilder.where();
             for (Map.Entry<String, String> entry : map.entrySet()) {
                 where.eq(entry.getKey(), entry.getValue()).and();
@@ -84,9 +84,9 @@ public abstract class BaseDao<T, Integer> {
         return query(preparedQuery);
     }
 
-    private List<T> queryOrLike(int pageNo, HashMap<String, String> map) throws SQLException {
+    protected List<T> queryOrLike(int pageNo, HashMap<String, String> map) throws SQLException {
         QueryBuilder<T, Integer> queryBuilder = getDao().queryBuilder();
-        if (map!=null) {
+        if (map != null) {
             Where<T, Integer> where = queryBuilder.where();
             for (Map.Entry<String, String> entry : map.entrySet()) {
                 where.like(entry.getKey(), "%" + entry.getValue() + "%").or();
@@ -102,19 +102,19 @@ public abstract class BaseDao<T, Integer> {
 
     private List<T> queryAndLike(int pageNo, HashMap<String, String> map, String likeFlag) throws SQLException {
         QueryBuilder<T, Integer> queryBuilder = getDao().queryBuilder();
-        if (map!=null) {
+        if (map != null) {
             Where<T, Integer> where = queryBuilder.where();
             for (Map.Entry<String, String> entry : map.entrySet()) {
-                switch (likeFlag){
+                switch (likeFlag) {
                     case LEFT:
                         where.like(entry.getKey(), "%" + entry.getValue()).and();
-                    break;
+                        break;
                     case RIGHT:
-                    where.like(entry.getKey(), entry.getValue() + "%").and();
-                    break;
+                        where.like(entry.getKey(), entry.getValue() + "%").and();
+                        break;
                     default:
-                        where.like(entry.getKey(), "%"+ entry.getValue() + "%").and();
-                    break;
+                        where.like(entry.getKey(), "%" + entry.getValue() + "%").and();
+                        break;
                 }
             }
         }

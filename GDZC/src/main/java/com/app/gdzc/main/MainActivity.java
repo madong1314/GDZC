@@ -8,6 +8,7 @@ import com.app.gdzc.R;
 import com.app.gdzc.base.BaseActivity;
 import com.app.gdzc.base.BasePresenter;
 import com.app.gdzc.sbdj.SbdjActivity;
+import com.app.gdzc.sbsh.view.SbshActivity;
 import com.app.gdzc.utils.ENavigate;
 import com.app.gdzc.utils.Utils;
 import com.app.gdzc.widget.viewpager.AutoScrollViewPager;
@@ -78,6 +79,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 ENavigate.startSbdjActivity(this, SbdjActivity.SBDJFRAGMENT);
                 break;
             case R.id.llayout_sbsh:
+                ENavigate.startActivity(this, SbshActivity.class);
                 break;
             case R.id.llayout_zmxg:
                 break;

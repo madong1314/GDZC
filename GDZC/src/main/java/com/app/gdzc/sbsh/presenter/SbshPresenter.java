@@ -3,9 +3,12 @@ package com.app.gdzc.sbsh.presenter;
 import android.app.Activity;
 
 import com.app.gdzc.base.BasePresenter;
+import com.app.gdzc.base.IEmptyInterFace;
 import com.app.gdzc.data.bean.ZJBean;
+import com.app.gdzc.data.source.local.ZJDao;
 import com.app.gdzc.net.ResponseListener;
 import com.app.gdzc.sbsh.model.SbshModel;
+import com.app.gdzc.sbsh.view.ISbshDetailView;
 import com.app.gdzc.sbsh.view.ISbshView;
 import com.app.gdzc.utils.Utils;
 
@@ -16,11 +19,19 @@ import java.util.List;
 /**
  * Created by 王少岩 on 2016/9/1.
  */
-public class SbshPresenter extends BasePresenter<ISbshView, SbshModel> implements ResponseListener<List<ZJBean>> {
+public class SbshPresenter extends BasePresenter<IEmptyInterFace, SbshModel> implements ResponseListener {
     private Activity mActivity;
+    private ISbshView mSbshView;
+    private ISbshDetailView mDetailView;
 
-    public SbshPresenter(Activity activity) {
+    public SbshPresenter(Activity activity, ISbshView sbshView) {
         mActivity = activity;
+        mSbshView = sbshView;
+    }
+
+    public SbshPresenter(Activity activity, ISbshDetailView detailView) {
+        mActivity = activity;
+        mDetailView = detailView;
     }
 
     @Override
@@ -33,8 +44,15 @@ public class SbshPresenter extends BasePresenter<ISbshView, SbshModel> implement
     }
 
     @Override
-    public void requestCompleted(String tag, List<ZJBean> list) throws JSONException {
-        mView.showView(list);
+    public void requestCompleted(String tag, Object response) throws JSONException {
+        switch (tag){
+            case ZJDao.ZJ_SEARCH:
+                mSbshView.showView((List<ZJBean>) response);
+            break;
+            case ZJDao.ZJ_SEARCH_BEAN:
+                mDetailView.showView(((List<ZJBean>) response).get(0));
+            break;
+        }
     }
 
     @Override

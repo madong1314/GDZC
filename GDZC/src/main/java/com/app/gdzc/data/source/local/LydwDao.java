@@ -8,6 +8,7 @@ import com.app.gdzc.net.ResponseListener;
 import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -39,5 +40,18 @@ public class LydwDao extends BaseDao<LydwBean, Integer> {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public String getMcByBh(String bh){
+        String dwmc = "";
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("单位编号",bh);
+        try {
+            LydwBean lydwBeen = query(0, hashMap).get(0);
+            dwmc = lydwBeen.getDwmc();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dwmc;
     }
 }

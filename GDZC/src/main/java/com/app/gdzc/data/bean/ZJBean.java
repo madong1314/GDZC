@@ -53,12 +53,42 @@ public class ZJBean {
     private String ghs;
     @DatabaseField(columnName = "字符字段7")
     private String flmc;
+    @DatabaseField(columnName = "现状")
+    private String xz;
+    @DatabaseField(columnName = "设备来源")
+    private String sbly;
+    @DatabaseField(columnName = "单价")
+    private String dj;
 
     public ZJBean() {
     }
 
+    public String getXz() {
+        return xz;
+    }
+
+    public void setXz(String xz) {
+        this.xz = xz;
+    }
+
+    public String getSbly() {
+        return sbly;
+    }
+
+    public void setSbly(String sbly) {
+        this.sbly = sbly;
+    }
+
     public String getYqmc() {
         return yqmc;
+    }
+
+    public String getDj() {
+        return dj;
+    }
+
+    public void setDj(String dj) {
+        this.dj = dj;
     }
 
     public void setYqmc(String yqmc) {
@@ -270,6 +300,15 @@ public class ZJBean {
                     break;
                 case "分类名称":
                     zjBean.setFlmc(map.get(key));
+                    break;
+                case "现状":
+                    zjBean.setXz(map.get(key));
+                    break;
+                case "设备来源":
+                    zjBean.setSbly(map.get(key));
+                    break;
+                case "单价":
+                    zjBean.setDj(map.get(key));
                     break;
             }
         }
