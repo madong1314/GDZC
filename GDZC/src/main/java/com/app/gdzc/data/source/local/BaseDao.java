@@ -86,7 +86,7 @@ public abstract class BaseDao<T, Integer> {
 
     private List<T> queryOrLike(int pageNo, HashMap<String, String> map) throws SQLException {
         QueryBuilder<T, Integer> queryBuilder = getDao().queryBuilder();
-        if (map.size() > 0) {
+        if (map!=null) {
             Where<T, Integer> where = queryBuilder.where();
             for (Map.Entry<String, String> entry : map.entrySet()) {
                 where.like(entry.getKey(), "%" + entry.getValue() + "%").or();
@@ -102,7 +102,7 @@ public abstract class BaseDao<T, Integer> {
 
     private List<T> queryAndLike(int pageNo, HashMap<String, String> map, String likeFlag) throws SQLException {
         QueryBuilder<T, Integer> queryBuilder = getDao().queryBuilder();
-        if (map.size() > 0) {
+        if (map!=null) {
             Where<T, Integer> where = queryBuilder.where();
             for (Map.Entry<String, String> entry : map.entrySet()) {
                 switch (likeFlag){

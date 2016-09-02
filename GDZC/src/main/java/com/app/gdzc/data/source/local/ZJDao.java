@@ -16,6 +16,7 @@ import java.sql.SQLException;
 public class ZJDao extends BaseDao<ZJBean, Integer> {
 
     public static final String ZJ_CREATE = "zj_create";
+    public static final String ZJ_SEARCH = "zj_search";
 
     public ZJDao(Activity activity) {
         super(activity);
@@ -39,5 +40,9 @@ public class ZJDao extends BaseDao<ZJBean, Integer> {
             listener.requestError(ZJ_CREATE, "保存失败");
             e.printStackTrace();
         }
+    }
+
+    public void getData(int pageNo, ResponseListener listener){
+        getData(ZJ_SEARCH, pageNo, null, listener);
     }
 }

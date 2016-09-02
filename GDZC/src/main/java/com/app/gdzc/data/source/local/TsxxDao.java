@@ -7,7 +7,6 @@ import com.app.gdzc.net.ResponseListener;
 import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -27,7 +26,7 @@ public class TsxxDao extends BaseDao<TsxxBean, Integer> {
     }
 
     public void getData(String tag, ResponseListener<List<TsxxBean>> listener) {
-        getData(tag, 0, new HashMap<String, String>(), listener);
+        getData(tag, 0, null, listener);
     }
 
     public List<TsxxBean> getDataAll(){

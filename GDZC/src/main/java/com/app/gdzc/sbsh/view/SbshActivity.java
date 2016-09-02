@@ -19,12 +19,13 @@ import butterknife.InjectView;
 /**
  * Created by 王少岩 on 2016/9/1.
  */
-public class SbshActivity extends BaseActivity<ISbshView, SbshModel, SbshPresenter> {
+public class SbshActivity extends BaseActivity<ISbshView, SbshModel, SbshPresenter> implements ISbshView {
     @InjectView(R.id.rv)
     PullToRefreshRecyclerView mRecyclerView;
-    LinearLayoutManager mLinearLayoutManager;
-    ZjAdapter mAdapter;
+    private LinearLayoutManager mLinearLayoutManager;
+    private ZjAdapter mAdapter;
     private List<ZJBean> mList = new ArrayList<>();
+    private int pageNo = 1;
 
     @Override
     protected void localOnCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class SbshActivity extends BaseActivity<ISbshView, SbshModel, SbshPresent
         setTitle("设备审核");
         showLeft();
         initView();
+        mPresenter.getData(pageNo);
     }
 
     private void initView(){
@@ -43,5 +45,10 @@ public class SbshActivity extends BaseActivity<ISbshView, SbshModel, SbshPresent
     @Override
     protected SbshPresenter initPresenter() {
         return new SbshPresenter(this);
+    }
+
+    @Override
+    public void showView(List<ZJBean> list) {
+
     }
 }

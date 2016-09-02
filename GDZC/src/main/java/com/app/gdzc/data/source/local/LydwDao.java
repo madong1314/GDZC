@@ -8,7 +8,6 @@ import com.app.gdzc.net.ResponseListener;
 import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -28,7 +27,7 @@ public class LydwDao extends BaseDao<LydwBean, Integer> {
     }
 
     public void getData(String tag, ResponseListener<List<LydwBean>> listener) {
-        getData(tag, 0, new HashMap<String, String>(), listener);
+        getData(tag, 0, null, listener);
     }
 
     public List<LydwBean> getData(){
