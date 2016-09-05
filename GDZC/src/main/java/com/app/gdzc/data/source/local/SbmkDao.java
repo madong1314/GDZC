@@ -30,4 +30,17 @@ public class SbmkDao extends BaseDao<FlhBean, Integer> {
         map.put("MC", keyWord);
         getDataOrLike(SBMKDAO_TAG, pageNo, map, listener);
     }
+
+    public String getMcByBh(String flh){
+        String mc = "";
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("FLH",flh);
+        try {
+            FlhBean flhBean = query(0, hashMap).get(0);
+            mc = flhBean.getMc();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return mc;
+    }
 }

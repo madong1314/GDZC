@@ -101,6 +101,7 @@ public class SbshActivity extends BaseActivity<IEmptyInterFace, SbshModel, SbshP
         mList.addAll(list);
         mAdapter.notifyDataSetChanged();
         mRecyclerView.onRefreshComplete();
+        mRecyclerView.setMode(list.size() > 0 ? PullToRefreshBase.Mode.BOTH : PullToRefreshBase.Mode.PULL_FROM_START);
     }
 
     @Override

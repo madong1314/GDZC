@@ -3,16 +3,19 @@ package com.app.gdzc.base;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.preference.PreferenceManager;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.app.gdzc.R;
 import com.app.gdzc.utils.DB_Copy;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 /**
@@ -23,6 +26,7 @@ public class BaseApplication extends Application {
     private RequestQueue mQueue;
     private SharedPreferences mPreferences;
     private SharedPreferences mUserPreference;
+    public static DisplayImageOptions imgoptions;
 
     @Override
     public void onCreate() {
@@ -87,12 +91,21 @@ public class BaseApplication extends Application {
                 .defaultDisplayImageOptions(needCacheOption) // cache
                 .build();
         ImageLoader.getInstance().init(config);
+
+        imgoptions = new DisplayImageOptions.Builder()
+//				.showImageOnLoading(R.drawable.loading)
+                .showImageForEmptyUri(R.mipmap.empty_pic)
+                .showImageOnFail(R.mipmap.empty_pic)
+                .cacheInMemory(true)
+                .cacheOnDisc(true)
+                .imageScaleType(ImageScaleType.EXACTLY_STRETCHED)
+                .considerExifParams(true).bitmapConfig(Bitmap.Config.RGB_565).build();
     }
 
     /**
      * 复制数据库
      */
-    private void copyDB(){
+    private void copyDB() {
         DB_Copy db_copy = new DB_Copy(this);
         db_copy.copyDataBase();
     }

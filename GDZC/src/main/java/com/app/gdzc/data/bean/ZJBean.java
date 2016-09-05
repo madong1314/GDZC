@@ -64,8 +64,28 @@ public class ZJBean implements Serializable {
     private String dj;
     @DatabaseField(columnName = "初审")
     private String cs;
+    @DatabaseField(columnName = "图片文件")
+    private String yqzp;
+    @DatabaseField(columnName = "图片文件1")
+    private String fpzp;
 
     public ZJBean() {
+    }
+
+    public String getYqzp() {
+        return yqzp;
+    }
+
+    public void setYqzp(String yqzp) {
+        this.yqzp = yqzp;
+    }
+
+    public String getFpzp() {
+        return fpzp;
+    }
+
+    public void setFpzp(String fpzp) {
+        this.fpzp = fpzp;
     }
 
     public String getCs() {
@@ -331,8 +351,15 @@ public class ZJBean implements Serializable {
                 case "单价":
                     zjBean.setDj(map.get(key));
                     break;
+                case "发票照片":
+                    zjBean.setFpzp(map.get(key));
+                    break;
+                case "仪器照片":
+                    zjBean.setYqzp(map.get(key));
+                    break;
             }
         }
+        zjBean.setCs("");
         return zjBean;
     }
 

@@ -5,11 +5,90 @@
     android:layout_height="match_parent"
     android:background="@color/app_bg">
     <LinearLayout
-        android:id="@+id/llayout_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:id="@+id/llayout_root"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"/>
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/dimen_10">
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/iv_image_yq"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:background="@drawable/rect_radius_gray"
+                        android:scaleType="fitXY"/>
+                    <ImageView
+                        android:id="@+id/iv_camera_yq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/ic_camera"/>
+                    <ImageView
+                        android:id="@+id/iv_del_yq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|top"
+                        android:src="@mipmap/ic_close"/>
+                </FrameLayout>
+                <TextView
+                    android:id="@+id/tv_name_yq"
+                    style="@style/text_normal"
+                    android:layout_gravity="center"
+                    android:paddingTop="4dp"
+                    android:text="仪器照片"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/dimen_10">
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/iv_image_fp"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:background="@drawable/rect_radius_gray"
+                        android:scaleType="fitXY"/>
+                    <ImageView
+                        android:id="@+id/iv_camera_fp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/ic_camera"/>
+                    <ImageView
+                        android:id="@+id/iv_del_fp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|top"
+                        android:src="@mipmap/ic_close"/>
+                </FrameLayout>
+                <TextView
+                    android:id="@+id/tv_name_fp"
+                    style="@style/text_normal"
+                    android:layout_gravity="center"
+                    android:text="发票照片"/>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

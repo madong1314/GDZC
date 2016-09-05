@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/select_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:gravity="bottom"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/select_ll_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/select_btn_0"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/actionsheet_top_selector"
+            android:hint="拍照"
+            android:textSize="@dimen/text_size_18"/>
+
+        <Button
+            android:id="@+id/select_btn_1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/actionsheet_bottom_selector"
+            android:hint="从手机相册选择"
+            android:textSize="@dimen/text_size_18"/>
+
+        <Button
+            android:id="@+id/select_btn_cancle"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/actionsheet_single_selector"
+            android:text="取消"
+            android:textSize="@dimen/text_size_18"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

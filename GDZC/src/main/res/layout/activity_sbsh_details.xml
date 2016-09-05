@@ -1,92 +1,351 @@
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_vertical"
-    android:orientation="vertical">
-
+    android:layout_height="match_parent"
+    android:background="@color/app_bg">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
 
-        <TextView
-            style="@style/text_sub"
-            android:text="领用单位:"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_lydw"
-            style="@style/text_normal"
-            android:text=""/>
+            <TextView
+                style="@style/text_sub"
+                android:text="仪器名称:"/>
+
+            <TextView
+                android:id="@+id/tv_yqmc"
+                style="@style/text_normal"
+                android:text=""/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/text_sub"
+                android:text="分类名称:"/>
+
+            <TextView
+                android:id="@+id/tv_flmc"
+                style="@style/text_normal"
+                android:text=""/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/text_sub"
+                android:text="领用单位:"/>
+
+            <TextView
+                android:id="@+id/tv_lydw"
+                style="@style/text_normal"
+                android:text=""/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/text_sub"
+                android:text="型&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;号:"/>
+
+            <TextView
+                android:id="@+id/tv_xh"
+                style="@style/text_normal"
+                android:text=""/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/text_sub"
+                android:text="规&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;格:"/>
+
+            <TextView
+                android:id="@+id/tv_gg"
+                style="@style/text_normal"
+                android:text=""/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/text_sub"
+                android:text="厂&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;家:"/>
+
+            <TextView
+                android:id="@+id/tv_cj"
+                style="@style/text_normal"
+                android:text=""/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/text_sub"
+                android:text="出&#160;&#160;厂&#160;&#160;号:"/>
+
+            <TextView
+                android:id="@+id/tv_cch"
+                style="@style/text_normal"
+                android:text=""/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/text_sub"
+                android:text="购置日期:"/>
+
+            <TextView
+                android:id="@+id/tv_gzrq"
+                style="@style/text_normal"
+                android:text=""/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/text_sub"
+                android:text="出厂日期:"/>
+
+            <TextView
+                android:id="@+id/tv_ccrq"
+                style="@style/text_normal"
+                android:text=""/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/text_sub"
+                android:text="保修期限:"/>
+
+            <TextView
+                android:id="@+id/tv_bxqx"
+                style="@style/text_normal"
+                android:text=""/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/text_sub"
+                android:text="存&#160;&#160;放&#160;&#160;地:"/>
+
+            <TextView
+                android:id="@+id/tv_cfd"
+                style="@style/text_normal"
+                android:text=""/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/text_sub"
+                android:text="经费科目:"/>
+
+            <TextView
+                android:id="@+id/tv_jfkm"
+                style="@style/text_normal"
+                android:text=""/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/text_sub"
+                android:text="使用方向:"/>
+
+            <TextView
+                android:id="@+id/tv_syfx"
+                style="@style/text_normal"
+                android:text=""/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/text_sub"
+                android:text="领&#160;&#160;用&#160;&#160;人:"/>
+
+            <TextView
+                android:id="@+id/tv_lyr"
+                style="@style/text_normal"
+                android:text=""/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/text_sub"
+                android:text="经&#160;&#160;手&#160;&#160;人:"/>
+
+            <TextView
+                android:id="@+id/tv_jsr"
+                style="@style/text_normal"
+                android:text=""/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/text_sub"
+                android:text="科&#160;&#160;研&#160;&#160;号:"/>
+
+            <TextView
+                android:id="@+id/tv_kyh"
+                style="@style/text_normal"
+                android:text=""/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/text_sub"
+                android:text="国&#160;&#160;别&#160;&#160;码:"/>
+
+            <TextView
+                android:id="@+id/tv_gbm"
+                style="@style/text_normal"
+                android:text=""/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/text_sub"
+                android:text="供&#160;&#160;货&#160;&#160;商:"/>
+
+            <TextView
+                android:id="@+id/tv_ghs"
+                style="@style/text_normal"
+                android:text=""/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/text_sub"
+                android:text="现&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;状:"/>
+
+            <TextView
+                android:id="@+id/tv_xz"
+                style="@style/text_normal"
+                android:text=""/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/text_sub"
+                android:text="设备来源:"/>
+
+            <TextView
+                android:id="@+id/tv_sbly"
+                style="@style/text_normal"
+                android:text=""/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/text_sub"
+                android:text="单&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;价:"/>
+
+            <TextView
+                android:id="@+id/tv_dj"
+                style="@style/text_normal"
+                android:text=""/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_10"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_yq"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/empty_pic"/>
+                <TextView
+                    android:id="@+id/tv_name_yq"
+                    style="@style/text_normal"
+                    android:layout_gravity="center"
+                    android:text="仪器照片"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_10"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_fp"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/empty_pic"/>
+                <TextView
+                    android:id="@+id/tv_name_fp"
+                    style="@style/text_normal"
+                    android:layout_gravity="center"
+                    android:text="发票照片"/>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            style="@style/text_sub"
-            android:text="仪器名称:"/>
-
-        <TextView
-            android:id="@+id/tv_yqmc"
-            style="@style/text_normal"
-            android:text=""/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            style="@style/text_sub"
-            android:text="单&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;价:"/>
-
-        <TextView
-            android:id="@+id/tv_dj"
-            style="@style/text_normal"
-            android:text=""/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            style="@style/text_sub"
-            android:text="型&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;号:"/>
-
-        <TextView
-            android:id="@+id/tv_xh"
-            style="@style/text_normal"
-            android:text=""/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            style="@style/text_sub"
-            android:text="规&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;格:"/>
-
-        <TextView
-            android:id="@+id/tv_gg"
-            style="@style/text_normal"
-            android:text=""/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            style="@style/text_sub"
-            android:text="领&#160;&#160;用&#160;&#160;人:"/>
-
-        <TextView
-            android:id="@+id/tv_lyr"
-            style="@style/text_normal"
-            android:text=""/>
-    </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

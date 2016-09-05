@@ -82,7 +82,7 @@ public abstract class BaseDao<T, Integer> {
         }
         if (pageNo > 0) {
             queryBuilder.limit(20);
-            queryBuilder.offset(pageNo);
+            queryBuilder.offset((pageNo-1)*20+1);
         }
         PreparedQuery<T> preparedQuery = queryBuilder.prepare();
         return query(preparedQuery);
@@ -98,7 +98,7 @@ public abstract class BaseDao<T, Integer> {
         }
         if (pageNo >= 1) {
             queryBuilder.limit(20);
-            queryBuilder.offset(pageNo);
+            queryBuilder.offset((pageNo-1)*20+1);
         }
         PreparedQuery<T> preparedQuery = queryBuilder.prepare();
         return query(preparedQuery);

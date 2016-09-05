@@ -53,4 +53,17 @@ public class MkDao extends BaseDao<MkBean, Integer> {
         map.put("BJ2", "1.0");
         getDataAndLike(MKDAO_TAG_JFKM, 0, map, listener, RIGHT);
     }
+
+    public String getMcByBh(String code){
+        String mc = "";
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("ID",code);
+        try {
+            MkBean mkBean = query(0, hashMap).get(0);
+            mc = mkBean.getNr().trim();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return mc;
+    }
 }
