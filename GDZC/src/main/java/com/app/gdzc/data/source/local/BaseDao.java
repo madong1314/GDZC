@@ -52,6 +52,10 @@ public abstract class BaseDao<T, Integer> {
         return getDao().create(t);
     }
 
+    protected int update(T t) throws SQLException {
+        return getDao().update(t);
+    }
+
     private List<T> query(PreparedQuery<T> preparedQuery) throws SQLException {
         Dao<T, Integer> dao = getDao();
         return dao.query(preparedQuery);

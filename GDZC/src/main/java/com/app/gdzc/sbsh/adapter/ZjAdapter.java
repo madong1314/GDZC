@@ -1,6 +1,7 @@
 package com.app.gdzc.sbsh.adapter;
 
 import android.app.Activity;
+import android.view.View;
 
 import com.app.gdzc.R;
 import com.app.gdzc.data.bean.ZJBean;
@@ -16,16 +17,36 @@ import java.util.List;
 public class ZjAdapter extends CommonAdapter<ZJBean> {
     private LydwDao mLydwDao;
 
+    private shListener mShListener;
+
     public ZjAdapter(Activity activity, int layoutId, List<ZJBean> datas){
         super(activity, layoutId, datas);
         mLydwDao = new LydwDao(activity);
     }
 
     @Override
-    public void convert(ViewHolder holder, ZJBean zjBean) {
+    public void convert(ViewHolder holder, final ZJBean zjBean) {
         holder.setText(R.id.tv_lydw, mLydwDao.getMcByBh(zjBean.getLydwh()));
         holder.setText(R.id.tv_yqmc, zjBean.getYqmc());
         holder.setText(R.id.tv_dj, zjBean.getDj());
         holder.setText(R.id.tv_xh, zjBean.getXh());
+        holder.setVisible(R.id.tv_shenhe, zjBean.getCs().equals("1")?false:true);
+        holder.setVisible(R.id.tv_yishenhe, zjBean.getCs().equals("1")?true:false);
+        holder.setOnClickListener(R.id.tv_shenhe, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mShListener != null){
+                    mShListener.onShListener(zjBean);
+                }
+            }
+        });
+    }
+
+    public interface shListener{
+        void onShListener(ZJBean zjBean);
+    }
+
+    public void setShListener(shListener shListener){
+        mShListener = shListener;
     }
 }

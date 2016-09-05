@@ -8,24 +8,8 @@
         "source": "D:\\workspace\\GDZC\\pickerview\\build\\intermediates\\bundles\\debug\\res\\layout\\include_pickerview_topbar.xml"
     },
     {
-        "merged": "D:\\workspace\\BusinessShow\\pickerview\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\include_pickerview_topbar.xml",
-        "source": "D:\\workspace\\BusinessShow\\pickerview\\build\\intermediates\\bundles\\debug\\res\\layout\\include_pickerview_topbar.xml"
-    },
-    {
-        "merged": "D:\\workspace\\BusinessShow\\pickerview\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\layout_basepickerview.xml",
-        "source": "D:\\workspace\\BusinessShow\\pickerview\\build\\intermediates\\bundles\\debug\\res\\layout\\layout_basepickerview.xml"
-    },
-    {
         "merged": "D:\\workspace\\GDZC\\pickerview\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\layout_basepickerview.xml",
         "source": "D:\\workspace\\GDZC\\pickerview\\build\\intermediates\\bundles\\debug\\res\\layout\\layout_basepickerview.xml"
-    },
-    {
-        "merged": "D:\\workspace\\BusinessShow\\pickerview\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pickerview_options.xml",
-        "source": "D:\\workspace\\BusinessShow\\pickerview\\build\\intermediates\\bundles\\debug\\res\\layout\\pickerview_options.xml"
-    },
-    {
-        "merged": "D:\\workspace\\BusinessShow\\pickerview\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pickerview_time.xml",
-        "source": "D:\\workspace\\BusinessShow\\pickerview\\build\\intermediates\\bundles\\debug\\res\\layout\\pickerview_time.xml"
     },
     {
         "merged": "D:\\workspace\\GDZC\\pickerview\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pickerview_time.xml",

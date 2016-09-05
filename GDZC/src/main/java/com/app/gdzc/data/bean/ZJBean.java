@@ -7,6 +7,7 @@ import com.app.gdzc.utils.Utils;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +15,9 @@ import java.util.Map;
  * Created by 王少岩 on 2016/8/26.
  */
 @DatabaseTable(tableName = "S_ZJ")
-public class ZJBean {
+public class ZJBean implements Serializable {
+    @DatabaseField(columnName = "ID", generatedId = true)
+    private int id;
     @DatabaseField(columnName = "仪器名称")
     private String yqmc;
     @DatabaseField(columnName = "分类号")
@@ -59,8 +62,26 @@ public class ZJBean {
     private String sbly;
     @DatabaseField(columnName = "单价")
     private String dj;
+    @DatabaseField(columnName = "初审")
+    private String cs;
 
     public ZJBean() {
+    }
+
+    public String getCs() {
+        return cs;
+    }
+
+    public void setCs(String cs) {
+        this.cs = cs;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getXz() {
@@ -315,11 +336,11 @@ public class ZJBean {
         return zjBean;
     }
 
-    public static boolean isCorrect(Map<String, String> map, List<TsxxBean> list){
+    public static boolean isCorrect(Map<String, String> map, List<TsxxBean> list) {
         boolean isCorrect = true;
-        for(TsxxBean bean:list){
-            if(bean.getCanBeNull().equals("1")){
-                if(!map.keySet().contains(bean.getShowContent())){
+        for (TsxxBean bean : list) {
+            if (bean.getCanBeNull().equals("1")) {
+                if (!map.keySet().contains(bean.getShowContent())) {
                     isCorrect = false;
                     Utils.showToast(BaseApplication.getAppContext(), bean.getHintContent());
                     return isCorrect;

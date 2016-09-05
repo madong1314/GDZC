@@ -2,6 +2,7 @@ package com.app.gdzc.sbsh.model;
 
 import android.app.Activity;
 
+import com.app.gdzc.data.bean.ZJBean;
 import com.app.gdzc.data.source.local.ZJDao;
 import com.app.gdzc.net.ResponseListener;
 
@@ -17,5 +18,9 @@ public class SbshModel {
 
     public void getData(int pageNo, ResponseListener listener){
         new ZJDao(mActivity).getData(pageNo, listener);
+    }
+
+    public void shenHeZJ(ZJBean zjBean, ResponseListener listener){
+        new ZJDao(mActivity).shenHeZJ(zjBean, listener);
     }
 }

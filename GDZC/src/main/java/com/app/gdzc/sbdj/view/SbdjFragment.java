@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -157,12 +159,15 @@ public class SbdjFragment extends BaseFragment<IEmptyInterFace, SbdjModel, SbdjP
                     tv_input.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            closeInput();
                             mTempTv = tv_input;
                             time_tag = tsxxBean.getShowContent();
                             popTime.show();
                         }
                     });
                     break;
+                case "dj":
+                    et_input.setInputType(EditorInfo.TYPE_CLASS_NUMBER);
                 default:
                     et_input.setHint(tsxxBean.getHintContent());
                     et_input.addTextChangedListener(new TextWatcher() {
@@ -210,5 +215,10 @@ public class SbdjFragment extends BaseFragment<IEmptyInterFace, SbdjModel, SbdjP
         SbdeMap.put(data.getStringExtra("colName"), data.getStringExtra("colCode"));
         mTempTv.setText(data.getStringExtra("colValue"));
         mTempTv.setHint(data.getStringExtra("colCode"));
+    }
+
+    private void closeInput() {
+        InputMethodManager im = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        im.hideSoftInputFromWindow(getActivity().getCurrentFocus().getApplicationWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 }

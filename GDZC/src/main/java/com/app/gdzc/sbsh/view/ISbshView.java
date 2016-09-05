@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface ISbshView {
     void showView(List<ZJBean> list);
+    void refreshView();
 }
