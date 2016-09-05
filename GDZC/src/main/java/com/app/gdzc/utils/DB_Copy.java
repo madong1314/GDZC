@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.app.gdzc.R;
+import com.app.gdzc.base.BaseApplication;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -16,19 +17,19 @@ import java.io.InputStream;
  */
 public class DB_Copy {
     private Context mContext;
-    private String DATABASE_DIR = "";
-    private String DATABASE_NAME = "gdzc.db";
+    public static final String DATABASE_NAME = "gdzc.db";
+    public static final File SD_CACHE_DIR = BaseApplication.getAppContext().getExternalCacheDir();
+    public static final String PATH_DB = "databases";
 
     public DB_Copy(Context context) {
         mContext = context;
-        DATABASE_DIR = "/data/data/"+ mContext.getPackageName() +"/databases/";
     }
 
     /**
      * 存储数据库文件
      */
     public void copyDataBase() {
-        File dir = new File(DATABASE_DIR);
+        File dir = new File(SD_CACHE_DIR, PATH_DB);
         if (!dir.exists()) dir.mkdir();
         File dest = new File(dir, DATABASE_NAME);
         if(dest.exists()) return;

@@ -3,10 +3,12 @@ package com.app.gdzc.data.source.local;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.app.gdzc.utils.DB_Copy;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +22,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private Context mContext;
 
     private DatabaseHelper(Context context) {
-        super(context, "/data/data/"+ context.getPackageName() +"/databases/gdzc.db", null, 2);
+        super(context, DB_Copy.SD_CACHE_DIR + File.separator + DB_Copy.PATH_DB + File.separator + DB_Copy.DATABASE_NAME, null, 2);
         mContext = context;
     }
 
@@ -33,12 +35,12 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     }
 
     public synchronized SQLiteDatabase getWritableDatabase() {
-        return SQLiteDatabase.openDatabase("/data/data/"+ mContext.getPackageName() +"/databases/gdzc.db", null,
+        return SQLiteDatabase.openDatabase(DB_Copy.SD_CACHE_DIR + File.separator + DB_Copy.PATH_DB + File.separator + DB_Copy.DATABASE_NAME, null,
                 SQLiteDatabase.OPEN_READWRITE);
     }
 
     public synchronized SQLiteDatabase getReadableDatabase() {
-        return SQLiteDatabase.openDatabase("/data/data/"+ mContext.getPackageName() +"/databases/gdzc.db", null,
+        return SQLiteDatabase.openDatabase(DB_Copy.SD_CACHE_DIR + File.separator + DB_Copy.PATH_DB + File.separator + DB_Copy.DATABASE_NAME, null,
                 SQLiteDatabase.OPEN_READONLY);
     }
 

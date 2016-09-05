@@ -119,7 +119,10 @@ public class SbshDetailsActivity extends BaseActivity<IEmptyInterFace, SbshModel
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.meun_main, menu);
-        menu.findItem(R.id.action_right).setTitle("审核");
+        if(zjBean.getCs().equals("1"))
+            menu.findItem(R.id.action_right).setVisible(false);
+        else
+            menu.findItem(R.id.action_right).setTitle("审核");
         return super.onCreateOptionsMenu(menu);
     }
 
