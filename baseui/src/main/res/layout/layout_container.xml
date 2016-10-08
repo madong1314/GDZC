@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="1dp"
+        app:elevation="1dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/toolbar_bg"
+            android:minHeight="?attr/actionBarSize"
+            android:logo="@mipmap/ic_launcher"
+            android:visibility="gone"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:title=" ">
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/text_nomal"
+                android:textSize="@dimen/text_size_16"
+                android:visibility="gone"/>
+
+            <com.magicindicator.MagicIndicator
+                android:id="@+id/magic_indicator"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:visibility="gone"/>
+            <RadioGroup
+                android:id="@+id/rg_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:visibility="gone">
+                <RadioButton
+                    android:id="@+id/tv_no_complete"
+                    style="@style/text_normal"
+                    android:background="@drawable/selector_left"
+                    android:button="@null"
+                    android:padding="8dp"
+                    android:text="未完成"
+                    android:textColor="@drawable/selector_text"/>
+                <RadioButton
+                    android:id="@+id/tv_complete"
+                    style="@style/text_normal"
+                    android:background="@drawable/selector_right"
+                    android:button="@null"
+                    android:padding="8dp"
+                    android:text="已完成"
+                    android:textColor="@drawable/selector_text"/>
+            </RadioGroup>
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+    <FrameLayout
+        android:id="@+id/contentFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>
